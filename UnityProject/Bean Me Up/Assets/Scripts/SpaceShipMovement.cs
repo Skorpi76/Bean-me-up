@@ -6,17 +6,29 @@ public class SpaceShipMovement : MonoBehaviour {
     private Rigidbody2D rb;
     public float maxVelocity = 3;
     public float rotationSpeed = 3;
-
+    GameObject engine;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        engine = GameObject.FindGameObjectWithTag("Engine");
+        engine.SetActive(false);
     }
     private void Update()
     {
         float yAxis = Input.GetAxis("Vertical");
         float xAxis = Input.GetAxis("Horizontal");
+        if (yAxis > 0)
+        {
+            engine.SetActive(true);
+        }
+        else
+        {
+            engine.SetActive(false);
+        }
         ThrustForward(yAxis);
         Rotate(transform, xAxis * -rotationSpeed);
+
+
     }
 
 
@@ -34,7 +46,7 @@ public class SpaceShipMovement : MonoBehaviour {
 
     private void ThrustForward(float amount)
     {
-        Vector2 force = transform.up * amount;
+        Vector2 force = transform.up * amount;    
         rb.AddForce(force); // will keep adding force as we keep the button on
     }
 
