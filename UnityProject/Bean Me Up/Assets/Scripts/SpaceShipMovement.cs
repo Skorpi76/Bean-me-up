@@ -7,6 +7,14 @@ public class SpaceShipMovement : MonoBehaviour {
     public float maxVelocity = 3;
     public float rotationSpeed = 3;
     GameObject engine;
+
+    bool isLanded = false;
+    public bool CanLand = false;
+    public bool isLanding = false;
+    public Vector3 PlanetCore;
+    public LayerMask PlanetLayer;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,8 +37,41 @@ public class SpaceShipMovement : MonoBehaviour {
         Rotate(transform, xAxis * -rotationSpeed);
 
 
+        if (Input.GetKeyDown("f") && CanLand) {
+            
+            Vector3 dir = PlanetCore - transform.position;
+            print(dir);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 20, PlanetLayer);
+            if (hit.collider != null)
+            {
+                print("land ship");
+                isLanding = true;
+                StartCoroutine(LandShip(hit.point, dir));
+            }
+            else {
+                print("Don't Land");
+            }
+            
+        }
+
+
     }
 
+    IEnumerator LandShip(Vector3 landingSpot, Vector3 landingDirection) {
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        print(landingSpot);
+        while (transform.position != landingSpot) {
+            transform.position = Vector3.MoveTowards(transform.position, landingSpot, 5 * Time.deltaTime);
+
+            //transform.rotation = Quaternion.Euler(landingDirection);
+
+            rb.velocity = new Vector3(0, 0, 0);
+            //print("Still landing");
+            yield return null;
+        }
+        isLanding = false;
+        isLanded = true;
+    }
 
 
     /// <summary>
