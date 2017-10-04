@@ -38,9 +38,11 @@ public class SpaceShipMovement : MonoBehaviour {
 
 
         if (Input.GetKeyDown("f") && CanLand) {
+
+
             
+
             Vector3 dir = PlanetCore - transform.position;
-            print(dir);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 20, PlanetLayer);
             if (hit.collider != null)
             {
@@ -59,14 +61,12 @@ public class SpaceShipMovement : MonoBehaviour {
 
     IEnumerator LandShip(Vector3 landingSpot, Vector3 landingDirection) {
         rb.bodyType = RigidbodyType2D.Kinematic;
-        print(landingSpot);
-        while (transform.position != landingSpot) {
+        float targetZRotation = Vector3.Angle(transform.up, -1 *landingDirection);
+        print(targetZRotation);
+        while (transform.position != landingSpot && transform.rotation.z != targetZRotation) {
             transform.position = Vector3.MoveTowards(transform.position, landingSpot, 5 * Time.deltaTime);
-
-            //transform.rotation = Quaternion.Euler(landingDirection);
-
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, targetZRotation), 5 * Time.deltaTime);
             rb.velocity = new Vector3(0, 0, 0);
-            //print("Still landing");
             yield return null;
         }
         isLanding = false;
