@@ -9,6 +9,9 @@ public class BeanBoyMovement : MonoBehaviour {
     bool jumping = false;
     public GameObject spriteObject;
 
+    [HideInInspector]
+    public Vector3 planetCore;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -16,6 +19,10 @@ public class BeanBoyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        float rotation = Vector3.Angle(Vector3.down,  planetCore - transform.position) - Vector3.Angle(Vector3.down, transform.up);
+        transform.Rotate(new Vector3(0,0,rotation));
+
         Vector3 newPosition = rb.transform.position + (new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * walkSpeed * Time.fixedDeltaTime);
         rb.MovePosition(newPosition);
 

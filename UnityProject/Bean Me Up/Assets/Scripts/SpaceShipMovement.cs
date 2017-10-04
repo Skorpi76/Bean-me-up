@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShipMovement : MonoBehaviour {
+public class SpaceShipMovement : MonoBehaviour
+{
     private Rigidbody2D rb;
     public float maxVelocity = 3;
     public float rotationSpeed = 3;
     GameObject engine;
 
-    bool isLanded = false;
+
+    public GameObject playerPrefab;
+
+    [HideInInspector]
     public bool CanLand = false;
-    public bool isLanding = false;
+    [HideInInspector]
     public Vector3 PlanetCore;
+
+    ShipState shipState = ShipState.NotLanding;
+    PlayerState playerState = PlayerState.Ship;
+
+    Coroutine landingCoroutine;  
     public LayerMask PlanetLayer;
 
 
@@ -20,57 +29,75 @@ public class SpaceShipMovement : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         engine = GameObject.FindGameObjectWithTag("Engine");
         engine.SetActive(false);
+
     }
     private void Update()
     {
-        float yAxis = Input.GetAxis("Vertical");
-        float xAxis = Input.GetAxis("Horizontal");
-        if (yAxis > 0)
+        if (playerState == PlayerState.Ship)
         {
-            engine.SetActive(true);
-        }
-        else
-        {
-            engine.SetActive(false);
-        }
-        ThrustForward(yAxis);
-        Rotate(transform, xAxis * -rotationSpeed);
-
-
-        if (Input.GetKeyDown("f") && CanLand) {
-
-
-            
-
-            Vector3 dir = PlanetCore - transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 20, PlanetLayer);
-            if (hit.collider != null)
+            float yAxis = Input.GetAxis("Vertical");
+            float xAxis = Input.GetAxis("Horizontal");
+            if (yAxis > 0)
             {
-                print("land ship");
-                isLanding = true;
-                StartCoroutine(LandShip(hit.point, dir));
+                engine.SetActive(true);
             }
-            else {
-                print("Don't Land");
+            else
+            {
+                engine.SetActive(false);
             }
-            
+            ThrustForward(yAxis);
+            Rotate(transform, xAxis * -rotationSpeed);
+
+
+            if (Input.GetKeyDown("f"))
+            {
+
+
+                if (CanLand && shipState == ShipState.NotLanding) //land ship
+                {
+
+                    Vector3 dir = PlanetCore - transform.position;
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 20, PlanetLayer);
+                    if (hit.collider != null)
+                    {
+                        shipState = ShipState.Landing;
+                        landingCoroutine = StartCoroutine(LandShip(hit.point + (hit.normal * 1), hit.normal, hit.transform.position));
+                    }
+                }
+                else if (shipState == ShipState.Landing) //cancel landing
+                {
+                    StopCoroutine(landingCoroutine);
+                    rb.bodyType = RigidbodyType2D.Dynamic;
+                    shipState = ShipState.NotLanding;
+                }
+
+
+
+            }
         }
 
 
     }
 
-    IEnumerator LandShip(Vector3 landingSpot, Vector3 landingDirection) {
+    IEnumerator LandShip(Vector3 landingSpot, Vector2 landingDirection, Vector3 core)
+    {
         rb.bodyType = RigidbodyType2D.Kinematic;
-        float targetZRotation = Vector3.Angle(transform.up, -1 *landingDirection);
-        print(targetZRotation);
-        while (transform.position != landingSpot && transform.rotation.z != targetZRotation) {
+        float startDistance = Vector3.Distance(transform.position, landingSpot);
+
+        while (transform.position != landingSpot)
+        {
             transform.position = Vector3.MoveTowards(transform.position, landingSpot, 5 * Time.deltaTime);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, targetZRotation), 5 * Time.deltaTime);
+
+            float transition = Mathf.Clamp(Vector3.Distance(transform.position, landingSpot) / startDistance, 0, 1);
+            transform.rotation = Quaternion.Lerp(Quaternion.FromToRotation(Vector3.up, landingDirection), transform.rotation, transition);
             rb.velocity = new Vector3(0, 0, 0);
+            print("landing");
             yield return null;
         }
-        isLanding = false;
-        isLanded = true;
+        shipState = ShipState.Landed;
+        GameObject player = Instantiate(playerPrefab, transform.position + transform.right ,transform.rotation) as GameObject;
+        player.GetComponent<BeanBoyMovement>().planetCore = core;
+        playerState = PlayerState.Bean;
     }
 
 
@@ -87,7 +114,7 @@ public class SpaceShipMovement : MonoBehaviour {
 
     private void ThrustForward(float amount)
     {
-        Vector2 force = transform.up * amount;    
+        Vector2 force = transform.up * amount;
         rb.AddForce(force); // will keep adding force as we keep the button on
     }
 
@@ -135,3 +162,7 @@ public class SpaceShipMovement : MonoBehaviour {
     //    rb.velocity = input * speed;
     //}
 }
+
+public enum ShipState {NotLanding, Landing, Landed}
+
+public enum PlayerState { Ship,Bean }
