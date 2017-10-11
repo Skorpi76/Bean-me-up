@@ -467,6 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2e48da8b85baa498f6bf4a6ad775af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 1176778020}
+  followPlayer: 0
+  planetZoom: 6
 --- !u!1 &454353468
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +783,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 921088146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -923,6 +926,7 @@ MonoBehaviour:
   rotationSpeed: 2
   playerPrefab: {fileID: 1071388118771718, guid: 730d5384135ef224f9f760f8a26ee6c9,
     type: 2}
+  playerInstance: {fileID: 0}
   CanLand: 0
   PlanetCore: {x: 0, y: 0, z: 0}
   PlanetLayer:

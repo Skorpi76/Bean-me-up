@@ -11,6 +11,8 @@ public class SpaceShipMovement : MonoBehaviour
 
 
     public GameObject playerPrefab;
+    [HideInInspector]
+    public GameObject playerInstance;
 
     [HideInInspector]
     public bool CanLand = false;
@@ -98,6 +100,9 @@ public class SpaceShipMovement : MonoBehaviour
         GameObject player = Instantiate(playerPrefab, transform.position + transform.right ,transform.rotation) as GameObject;
         player.GetComponent<BeanBoyMovement>().planetCore = core;
         playerState = PlayerState.Bean;
+
+        playerInstance = player;
+        Camera.main.GetComponent<CameraFollowSpaceShip>().followPlayer = true;
     }
 
 

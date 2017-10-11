@@ -9,6 +9,8 @@ public class BeanBoyMovement : MonoBehaviour {
     bool jumping = false;
     public GameObject spriteObject;
 
+    public LayerMask playerWalk;
+
     [HideInInspector]
     public Vector3 planetCore;
 
@@ -20,31 +22,36 @@ public class BeanBoyMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        float rotation = Vector3.Angle(Vector3.down,  planetCore - transform.position) - Vector3.Angle(Vector3.down, transform.up);
-        transform.Rotate(new Vector3(0,0,rotation));
+        if (Quaternion.FromToRotation(Vector3.down, (new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized) == Quaternion.FromToRotation(Vector3.down, Vector3.up))
+        {
+            //print("Dont flip out bean boy");
+        }
+        else {
+            transform.rotation = Quaternion.Lerp(Quaternion.FromToRotation(Vector3.down, (new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized), transform.rotation, Time.fixedDeltaTime);
+        }
+        Gravity();
 
-        Vector3 newPosition = rb.transform.position + (new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * walkSpeed * Time.fixedDeltaTime);
-        rb.MovePosition(newPosition);
+
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up * -10, playerWalk);
+        rb.velocity = transform.right * Input.GetAxis("Horizontal") * 10;
 
         if (Input.GetKeyDown("space") && !jumping) {
-            StartCoroutine("Jump");
+            StartCoroutine(Jump());
         }
 	}
 
+    void Gravity() {
+
+        rb.AddForce((new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized * 90.8f);
+
+    }
+
     IEnumerator Jump() {
-        float t = 0;
-        jumping = true;
-        while (t < .8f) {
-            t += 3 * Time.deltaTime;
-            spriteObject.transform.position = rb.transform.position + new Vector3(0,t,0);
+        float t = 1;
+        while (t > 0) {
+            rb.AddForce((new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized * -(400.0f * t));
+            t -= 0.05f;
             yield return null;
         }
-        while (t > 0)
-        {
-            t -= 3 * Time.deltaTime;
-            spriteObject.transform.position = rb.transform.position + new Vector3(0, t, 0);
-            yield return null;
-        }
-        jumping = false;
     }
 }
