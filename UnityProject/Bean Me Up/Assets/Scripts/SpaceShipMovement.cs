@@ -81,6 +81,28 @@ public class SpaceShipMovement : MonoBehaviour
 
     }
 
+    public void StartTakeOff() {
+        playerState = PlayerState.Ship;
+        Destroy(playerInstance);
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        StartCoroutine(TakeOff());
+    }
+
+    IEnumerator TakeOff() {
+        playerState = PlayerState.Ship;
+        Camera.main.GetComponent<CameraFollowSpaceShip>().followPlayer = false;
+        float t = 5;
+        while (t > 0) {
+            print("taking off");
+            t = t - 5 * Time.deltaTime;
+            rb.AddForce(transform.up * 250 * Time.deltaTime);
+            yield return null;
+        }
+        shipState = ShipState.NotLanding;
+        
+
+    }
+
     IEnumerator LandShip(Vector3 landingSpot, Vector2 landingDirection, Vector3 core)
     {
         rb.bodyType = RigidbodyType2D.Kinematic;
