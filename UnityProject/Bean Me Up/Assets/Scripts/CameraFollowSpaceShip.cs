@@ -45,6 +45,15 @@ public class CameraFollowSpaceShip : MonoBehaviour {
 
     void FollowShip()
     {
+        if (Camera.main.orthographicSize != 14)
+        {
+            Camera.main.orthographicSize = Mathf.SmoothStep(Camera.main.orthographicSize, 14, 5 * Time.deltaTime);
+        }
+
+        if (transform.rotation != ship.transform.rotation)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 10);
+        }
         Vector3 newPos = new Vector3(ship.transform.position.x, ship.transform.position.y, this.transform.position.z);
         this.transform.position = newPos;
     }
