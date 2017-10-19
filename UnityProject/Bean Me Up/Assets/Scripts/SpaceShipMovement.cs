@@ -20,11 +20,12 @@ public class SpaceShipMovement : MonoBehaviour
     public Vector3 PlanetCore;
 
     ShipState shipState = ShipState.NotLanding;
-    PlayerState playerState = PlayerState.Ship;
+    public PlayerState playerState = PlayerState.Ship;
 
     Coroutine landingCoroutine;  
     public LayerMask PlanetLayer;
 
+    
 
     private void Start()
     {

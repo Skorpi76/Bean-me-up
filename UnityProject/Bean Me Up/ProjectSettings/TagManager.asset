@@ -44,3 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Planet
+    uniqueID: 2352281191
+    locked: 0
+  - name: SpacePlanet
+    uniqueID: 824055539
+    locked: 0
+  - name: Player
+    uniqueID: 3408927739
+    locked: 0

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114656095692641432}
   - component: {fileID: 50847915190382730}
   - component: {fileID: 58798057543426196}
+  - component: {fileID: 210237521452099028}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -127,6 +128,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   planetCore: {x: 0, y: 0, z: 0}
+--- !u!210 &210237521452099028
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071388118771718}
+  m_Enabled: 1
+  m_SortingLayerID: -886039557
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!212 &212635539479970158
 SpriteRenderer:
   m_ObjectHideFlags: 1
