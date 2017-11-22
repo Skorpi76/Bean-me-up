@@ -27,7 +27,7 @@ public class BeanBoyMovement : MonoBehaviour
         if (Input.GetKeyDown("f"))
         {
             print("f pressed");
-            RaycastHit2D hit = Physics2D.CircleCast(transform.position, 5, transform.forward, 10, shipLayerMask);
+            RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, transform.forward, 10, shipLayerMask);
             if (hit.collider.tag == "Player")
             {
                 

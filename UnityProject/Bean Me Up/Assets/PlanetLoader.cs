@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlanetLoader : MonoBehaviour {
 
-
+	Color colorStart;
     public UnityEngine.Object sceneToLoad;
     //public GameObject planet;
     public GameObject AtmosphereObj;
@@ -14,7 +14,7 @@ public class PlanetLoader : MonoBehaviour {
     public float planetRadius;
 	// Use this for initialization
 	void Start () {
-		
+		colorStart = AtmosphereObj.GetComponent<Renderer> ().material.color;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,6 +25,7 @@ public class PlanetLoader : MonoBehaviour {
             print("load Scene " + sceneToLoad.name);
             SceneManager.LoadScene(sceneToLoad.name, LoadSceneMode.Additive);
             OnPLanet = true;
+			Fade ();
             //SceneManager.GetSceneByName(sceneToLoad.name).
 
         }
@@ -35,7 +36,7 @@ public class PlanetLoader : MonoBehaviour {
     }
 
     IEnumerator FadeOut(GameObject player) {
-        Color colorStart = AtmosphereObj.GetComponent<Renderer>().material.color;
+        //Color colorStart = AtmosphereObj.GetComponent<Renderer>().material.color;
         Color colorEnd = colorStart;
         colorEnd.a = 0;
         while (player.GetComponent<SpaceShipMovement>().playerState == PlayerState.Ship && OnPLanet)
@@ -56,6 +57,7 @@ public class PlanetLoader : MonoBehaviour {
             print("Unload Scene " + sceneToLoad.name);
             SceneManager.UnloadSceneAsync(sceneToLoad.name);
             OnPLanet = false;
+			AtmosphereObj.GetComponent<Renderer>().material.color = colorStart;
         }
     }
 

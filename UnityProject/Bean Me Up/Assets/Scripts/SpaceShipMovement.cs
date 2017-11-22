@@ -52,6 +52,7 @@ public class SpaceShipMovement : MonoBehaviour
             Rotate(transform, xAxis * -rotationSpeed);
 
 
+
             if (Input.GetKeyDown("f"))
             {
 
@@ -150,6 +151,7 @@ public class SpaceShipMovement : MonoBehaviour
     private void Rotate(Transform t, float amount)
     {
         t.Rotate(0, 0, amount);
+		rb.velocity = transform.up * rb.velocity.magnitude;
     }
 
 
