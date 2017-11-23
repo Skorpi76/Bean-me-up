@@ -7,12 +7,15 @@ public class BeanBoyMovement : MonoBehaviour
 
     Rigidbody2D rb;
     public float walkSpeed = 5;
-    bool jumping = false;
+    //bool jumping = false;
     public GameObject spriteObject;
 
     public LayerMask playerWalk;
     public LayerMask shipLayerMask;
 
+	public Transform groundRay; 
+	public float maxJumpTime;
+	Vector2 jump;
     [HideInInspector]
     public Vector3 planetCore;
 
@@ -20,6 +23,7 @@ public class BeanBoyMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+		jump = new Vector2 (0, 0);
     }
 
     private void Update()
@@ -39,49 +43,49 @@ public class BeanBoyMovement : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
+	{
 
-        if (Quaternion.FromToRotation(Vector3.down, (new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized) == Quaternion.FromToRotation(Vector3.down, Vector3.up))
-        {
-            //print("Dont flip out bean boy");
-        }
-        else
-        {
-            transform.rotation = Quaternion.Lerp(Quaternion.FromToRotation(Vector3.down, (new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized), transform.rotation, Time.fixedDeltaTime);
-        }
+		if (Quaternion.FromToRotation (Vector3.down, (new Vector3 (planetCore.x, planetCore.y, 0) - new Vector3 (transform.position.x, transform.position.y, 0)).normalized) == Quaternion.FromToRotation (Vector3.down, Vector3.up)) {
+			//print("Dont flip out bean boy");
+		} else {
+			transform.rotation = Quaternion.Lerp (Quaternion.FromToRotation (Vector3.down, (new Vector3 (planetCore.x, planetCore.y, 0) - new Vector3 (transform.position.x, transform.position.y, 0)).normalized), transform.rotation, Time.fixedDeltaTime);
+		}
 
+		//gravity
+		Vector2 gravity = new Vector2 (0, 0);
+		RaycastHit2D gravityHit = Physics2D.Raycast (groundRay.position, transform.up * -1, 0.05f, playerWalk);
+		if (gravityHit.collider == null) {
+			gravity = transform.up * -10;
+		}
 
+		//horizontal movement
+		Vector2 vInput = transform.right * Input.GetAxis ("Horizontal") * Time.deltaTime * 200;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up * -1, 0.1f, playerWalk);
-        //horizontal movement
-		rb.velocity = transform.right * Input.GetAxis("Horizontal") * 10;
-		Gravity();
-        if (Input.GetKeyDown("space") && hit.collider != null)
-        {
-			print ("we are trying to jump here");
-			rb.velocity += new Vector2(transform.up.x, transform.up.y) * 30;
+		//jump
+		if (Input.GetKeyDown ("space")) {
+			RaycastHit2D jumpHit = Physics2D.Raycast (groundRay.position, transform.up * -1, 0.1f, playerWalk);
+			if (jumpHit.collider != null) {
+				print ("try jumping");
+				StartCoroutine (Jump ());
+			}
+		}
 
-            //StartCoroutine(Jump());
-        }
+		//add up all velocitys
+		rb.velocity = vInput + gravity + jump; 
 
         
-    }
-
-    void Gravity()
-    {
-
-        rb.AddForce((new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized * 90.8f);
-
-    }
+	}
 
     IEnumerator Jump()
     {
-        float t = 1;
-        while (t > 0)
+		print ("jump co");
+		float startJumpTime = Time.time;
+		while (Input.GetKey("space") &&  Time.time - startJumpTime > maxJumpTime)
         {
-            rb.AddForce((new Vector3(planetCore.x, planetCore.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized * -(400.0f * t));
-            t -= 0.05f;
+			jump = transform.up * 100;
+			print ("jumping");
             yield return null;
         }
+		//jump = new Vector2 (0, 0);
     }
 }
