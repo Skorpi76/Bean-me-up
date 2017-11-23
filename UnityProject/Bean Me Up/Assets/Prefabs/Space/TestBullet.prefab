@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114658136698135288}
   - component: {fileID: 114123089735603262}
   - component: {fileID: 61127118641137528}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TestBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1322027458049948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.670791, y: -1.4176978, z: 0}
+  m_LocalPosition: {x: 447.29, y: 1.83, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

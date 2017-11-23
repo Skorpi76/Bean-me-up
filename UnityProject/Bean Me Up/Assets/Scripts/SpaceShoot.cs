@@ -15,7 +15,8 @@ public class SpaceShoot : MonoBehaviour {
         myTime += Time.deltaTime;
         if (Input.GetKey(KeyCode.Space) && myTime > nextFire)
         {
-            Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation);
+			GameObject laser = Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation) as GameObject;
+			laser.GetComponent<Rigidbody2D>().velocity =  laser.transform.up * (GetComponent<Rigidbody2D> ().velocity.magnitude + laser.GetComponent<Projectile> ().speed);
             myTime = 0.0f;
         }
     }

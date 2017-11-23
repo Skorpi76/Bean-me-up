@@ -53,15 +53,18 @@ public class BeanBoyMovement : MonoBehaviour
 
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up * -1, 0.1f, playerWalk);
-        rb.velocity = transform.right * Input.GetAxis("Horizontal") * 10;
-
+        //horizontal movement
+		rb.velocity = transform.right * Input.GetAxis("Horizontal") * 10;
+		Gravity();
         if (Input.GetKeyDown("space") && hit.collider != null)
         {
+			print ("we are trying to jump here");
+			rb.velocity += new Vector2(transform.up.x, transform.up.y) * 30;
 
-            StartCoroutine(Jump());
+            //StartCoroutine(Jump());
         }
 
-        Gravity();
+        
     }
 
     void Gravity()

@@ -101,7 +101,8 @@ public class SpaceShipMovement : MonoBehaviour
             yield return null;
         }
         shipState = ShipState.NotLanding;
-        
+		GetComponent<SpaceShoot> ().enabled = true;
+
 
     }
 
@@ -124,6 +125,8 @@ public class SpaceShipMovement : MonoBehaviour
         GameObject player = Instantiate(playerPrefab, transform.position + transform.right ,transform.rotation) as GameObject;
         player.GetComponent<BeanBoyMovement>().planetCore = core;
         playerState = PlayerState.Bean;
+
+		GetComponent<SpaceShoot> ().enabled = false;
 
         playerInstance = player;
         Camera.main.GetComponent<CameraFollowSpaceShip>().followPlayer = true;

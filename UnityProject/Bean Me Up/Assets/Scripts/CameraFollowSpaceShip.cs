@@ -36,7 +36,7 @@ public class CameraFollowSpaceShip : MonoBehaviour {
         }
 
         if (transform.rotation != ship.GetComponent<SpaceShipMovement>().playerInstance.transform.rotation) {
-            transform.rotation = Quaternion.Lerp(transform.rotation, ship.GetComponent<SpaceShipMovement>().playerInstance.transform.rotation, Time.deltaTime * 10);
+            transform.rotation = Quaternion.Lerp(transform.rotation, ship.GetComponent<SpaceShipMovement>().playerInstance.transform.rotation, Time.deltaTime * 1000);
         }
 
         Vector3 newPos = new Vector3(ship.GetComponent<SpaceShipMovement>().playerInstance.transform.position.x, ship.GetComponent<SpaceShipMovement>().playerInstance.transform.position.y, this.transform.position.z);
