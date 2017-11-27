@@ -11,8 +11,8 @@ public class SpaceShipMovement : MonoBehaviour
 
 
     public GameObject playerPrefab;
-    [HideInInspector]
-    public GameObject playerInstance;
+    //[HideInInspector]
+    //public GameObject playerInstance;
 
     [HideInInspector]
     public bool CanLand = false;
@@ -57,12 +57,13 @@ public class SpaceShipMovement : MonoBehaviour
             {
 
 
-                if (CanLand && shipState == ShipState.NotLanding) //land ship
+                if (shipState == ShipState.NotLanding) //land ship
                 {
-
+					print (PlanetCore);
                     Vector3 dir = PlanetCore - transform.position;
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 20, PlanetLayer);
-                    if (hit.collider != null)
+					RaycastHit2D hit = Physics2D.Raycast (transform.position, dir, 20, PlanetLayer);
+					print (hit.collider.name);
+                    if (hit.collider.tag == "PlanetLand")
                     {
                         shipState = ShipState.Landing;
                         landingCoroutine = StartCoroutine(LandShip(hit.point + (hit.normal * 1), hit.normal, hit.transform.position));
@@ -85,7 +86,7 @@ public class SpaceShipMovement : MonoBehaviour
 
     public void StartTakeOff() {
         playerState = PlayerState.Ship;
-        Destroy(playerInstance);
+       // Destroy(playerInstance);
         rb.bodyType = RigidbodyType2D.Dynamic;
         StartCoroutine(TakeOff());
     }
@@ -118,7 +119,6 @@ public class SpaceShipMovement : MonoBehaviour
             float transition = Mathf.Clamp(Vector3.Distance(transform.position, landingSpot) / startDistance, 0, 1);
             transform.rotation = Quaternion.Lerp(Quaternion.FromToRotation(Vector3.up, landingDirection), transform.rotation, transition);
             rb.velocity = new Vector3(0, 0, 0);
-            print("landing");
             yield return null;
         }
         shipState = ShipState.Landed;
@@ -128,8 +128,9 @@ public class SpaceShipMovement : MonoBehaviour
 
 		GetComponent<SpaceShoot> ().enabled = false;
 
-        playerInstance = player;
+        //playerInstance = player;
         Camera.main.GetComponent<CameraFollowSpaceShip>().followPlayer = true;
+		 
     }
 
 

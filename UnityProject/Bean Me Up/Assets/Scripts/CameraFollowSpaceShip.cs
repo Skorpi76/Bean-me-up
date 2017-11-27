@@ -5,9 +5,10 @@ using UnityEngine;
 public class CameraFollowSpaceShip : MonoBehaviour {
 
     public GameObject ship;
+	public GameObject player;
     [HideInInspector]
     public bool followPlayer = false;
-
+	public Camera mapCamera;
     public float planetZoom;
 
     // Use this for initialization
@@ -19,6 +20,18 @@ public class CameraFollowSpaceShip : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
+
+		if (Input.GetKey ("m")) {
+			if (!mapCamera.enabled) {
+				mapCamera.enabled = true;
+			}
+		} else {
+			if (mapCamera.enabled) {
+				mapCamera.enabled = false;
+			}
+		}
+
                 
         if (followPlayer)
         {
@@ -35,19 +48,19 @@ public class CameraFollowSpaceShip : MonoBehaviour {
             Camera.main.orthographicSize = Mathf.SmoothStep(Camera.main.orthographicSize, planetZoom, 5 * Time.deltaTime);
         }
 
-        if (transform.rotation != ship.GetComponent<SpaceShipMovement>().playerInstance.transform.rotation) {
-            transform.rotation = Quaternion.Lerp(transform.rotation, ship.GetComponent<SpaceShipMovement>().playerInstance.transform.rotation, Time.deltaTime * 1000);
+        if (transform.rotation != player.transform.rotation) {
+            transform.rotation = Quaternion.Lerp(transform.rotation, player.transform.rotation, Time.deltaTime * 10);
         }
 
-        Vector3 newPos = new Vector3(ship.GetComponent<SpaceShipMovement>().playerInstance.transform.position.x, ship.GetComponent<SpaceShipMovement>().playerInstance.transform.position.y, this.transform.position.z);
+		Vector3 newPos = new Vector3(player.transform.position.x, player.transform.position.y, this.transform.position.z);
         this.transform.position = newPos;
     }
 
     void FollowShip()
     {
-        if (Camera.main.orthographicSize != 14)
+        if (Camera.main.orthographicSize != 20)
         {
-            Camera.main.orthographicSize = Mathf.SmoothStep(Camera.main.orthographicSize, 14, 5 * Time.deltaTime);
+            Camera.main.orthographicSize = Mathf.SmoothStep(Camera.main.orthographicSize, 20, 5 * Time.deltaTime);
         }
 
         if (transform.rotation != ship.transform.rotation)
