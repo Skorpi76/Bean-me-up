@@ -31,6 +31,10 @@ public class controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Input.GetKeyDown ("r")) {
+			GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().RespawnPlayer ();
+		}
+
 		if (inSpace) {
 		//space movement
 
@@ -83,6 +87,8 @@ public class controller : MonoBehaviour {
 			//re-apply updated velocity
 			rb.velocity = transform.TransformDirection (localSpaceVelocity);
 		}
+
+
 
 		if(Input.GetKeyDown("f")){
 		//get in ship

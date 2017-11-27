@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4740162872113146}
   - component: {fileID: 61778822564572020}
   - component: {fileID: 114450420218873092}
+  - component: {fileID: 114227839221946328}
   m_Layer: 12
   m_Name: LandingPad
   m_TagString: Untagged
@@ -135,6 +136,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114227839221946328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1803448405481656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f73572707a01e459d376bb92c770f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pRespawnMode: 0
+  respawn: 1
 --- !u!114 &114450420218873092
 MonoBehaviour:
   m_ObjectHideFlags: 1
