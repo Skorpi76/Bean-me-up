@@ -13,23 +13,28 @@ public class LaunchPad : MonoBehaviour {
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col){
 
+
 		if (col.tag == "Ship") {
 			ship = col.gameObject;
-			ship.GetComponent<SpaceShipMovement1> ().launchPad = this;
+
+			ship.GetComponent<SpaceShipMovement1> ().launchPad = gameObject;
+
+
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D col){
 
 		if (col.tag == "Ship") {
-			ship.GetComponent<SpaceShipMovement1> ().launchPad = null;
-			ship = null;
+			if(col.GetComponent<SpaceShipMovement1>().landed == false){
+				ship.GetComponent<SpaceShipMovement1> ().launchPad = null; //
+				ship = null;
+			}
 
 		}
 	}
 
 	public void ExitPlanet(){
-
 		UnLoadLevel ();
 
 	}
@@ -39,6 +44,7 @@ public class LaunchPad : MonoBehaviour {
 		ship.transform.position = transform.position;
 		ship.transform.rotation = transform.rotation;
 		ship.GetComponent<SpaceShipMovement1> ().landed = true;
+		ship.GetComponent<SpaceShipMovement1> ().launchPad = gameObject;
 
 		LoadLevel ();
 		GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = gameObject.GetComponent<Checkpoint> ();

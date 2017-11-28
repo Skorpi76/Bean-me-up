@@ -20,6 +20,7 @@ public class Checkpoint : MonoBehaviour {
 			Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = true;
 
 			GameObject player = Instantiate (GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerPrefab, transform.position + transform.right, transform.rotation) as GameObject;
+			player.GetComponent<controller> ().ship = Camera.main.GetComponent<CameraFollowSpaceShip> ().ship;
 			Camera.main.GetComponent<CameraFollowSpaceShip> ().player = player;
 			break;
 		}

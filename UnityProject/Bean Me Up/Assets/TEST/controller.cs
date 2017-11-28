@@ -13,6 +13,8 @@ public class controller : MonoBehaviour {
 	float controlFactor = 1;
 	Rigidbody2D rb;
 	public Vector3 gravityPull;
+	public GameObject ship;
+	public Transform shipcompass;
 
 	public LayerMask shipLayerMask;
 
@@ -21,6 +23,8 @@ public class controller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
+		Camera.main.GetComponent<CameraFollowSpaceShip> ().player = gameObject;
+		Camera.main.GetComponent<CameraFollowSpaceShip>().followPlayer = true;
 	}
 
 	IEnumerator JetPackReCharge(){
@@ -30,13 +34,17 @@ public class controller : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		Camera.main.GetComponent<CameraFollowSpaceShip>().playerInSpace = inSpace;
 		if (Input.GetKeyDown ("r")) {
 			GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().RespawnPlayer ();
 		}
 
 		if (inSpace) {
 		//space movement
+
+			Vector3 dir = (transform.position - ship.transform.position).normalized;
+			shipcompass.rotation = Quaternion.LookRotation (dir, Vector3.up);
+			shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
 			//rotation
 			transform.Rotate (0, 0, Input.GetAxis ("Horizontal") * -1 * Time.deltaTime * 60);
@@ -58,7 +66,7 @@ public class controller : MonoBehaviour {
 
 		} else {
 		//planet movement
-
+			shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			//jump
 			if (Input.GetKeyDown ("space") && !falling) {
 				rb.AddForce (transform.up * 150);
@@ -70,18 +78,53 @@ public class controller : MonoBehaviour {
 			// store player velocity in local space
 			Vector3 localSpaceVelocity = transform.InverseTransformDirection (rb.velocity);
 
+
+
+
+
 			//raycast to deturmin if we are on the ground
 			RaycastHit2D hit = Physics2D.Raycast (transform.position, transform.up * -1, 1.2f, walkLayer);
 			if (hit.collider != null) {
 				falling = false;
 				controlFactor = 1f;
-				localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
+
+				RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
+				if (horizontalHit.collider == null) {
+					print ("horizontal ray not hit");
+					localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
+				} else {
+					print ("horizontal ray  hit");
+					localSpaceVelocity = new Vector3 (localSpaceVelocity.x, localSpaceVelocity.y, 0);
+				}
+
+
+				//localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 				//rb.MovePosition( (transform.position + (transform.right * Input.GetAxis ("Horizontal") * Time.deltaTime * 4)));
 
 			} else {
+
 				falling = true;
 				controlFactor = 0.8f;
-				localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f + Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
+				//raycast to check if we can move to the left or right while falling
+				if (Mathf.Abs (Input.GetAxis ("Horizontal")) > 0) {
+
+					RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
+					if (horizontalHit.collider == null) {
+						print ("horizontal ray not hit");
+						localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f + Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
+					} else {
+						print ("horizontal ray  hit");
+						localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f , localSpaceVelocity.y, 0);
+					}
+
+				} else {
+					localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f , localSpaceVelocity.y, 0);
+				}
+
+
+
+
+				//localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f + Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 			}
 
 			//re-apply updated velocity

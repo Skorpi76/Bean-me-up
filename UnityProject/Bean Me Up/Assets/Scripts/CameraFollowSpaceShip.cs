@@ -6,6 +6,9 @@ public class CameraFollowSpaceShip : MonoBehaviour {
 
     public GameObject ship;
 	public GameObject player;
+
+	public bool playerInSpace = true;
+
     [HideInInspector]
     public bool followPlayer = false;
 	public Camera mapCamera;
@@ -44,14 +47,24 @@ public class CameraFollowSpaceShip : MonoBehaviour {
 
     void FollowPlayer()
     {
-        if (Camera.main.orthographicSize != planetZoom) {
-            Camera.main.orthographicSize = Mathf.SmoothStep(Camera.main.orthographicSize, planetZoom, 5 * Time.deltaTime);
-        }
+		if (!playerInSpace) {
+			if (Camera.main.orthographicSize != planetZoom) {
+				Camera.main.orthographicSize = Mathf.SmoothStep (Camera.main.orthographicSize, planetZoom, 5 * Time.deltaTime);
+			}
 
-        if (transform.rotation != player.transform.rotation) {
-            transform.rotation = Quaternion.Lerp(transform.rotation, player.transform.rotation, Time.deltaTime * 10);
-        }
-
+			if (transform.rotation != player.transform.rotation) {
+				transform.rotation = Quaternion.Lerp (transform.rotation, player.transform.rotation, Time.deltaTime * 10);
+			}
+		} else {
+			if (Camera.main.orthographicSize != 20)
+			{
+				Camera.main.orthographicSize = Mathf.SmoothStep(Camera.main.orthographicSize, 20, 5 * Time.deltaTime);
+			}
+			if (transform.rotation != Quaternion.identity)
+			{
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 10);
+			}
+		}
 		Vector3 newPos = new Vector3(player.transform.position.x, player.transform.position.y, this.transform.position.z);
         this.transform.position = newPos;
     }
@@ -63,7 +76,7 @@ public class CameraFollowSpaceShip : MonoBehaviour {
             Camera.main.orthographicSize = Mathf.SmoothStep(Camera.main.orthographicSize, 20, 5 * Time.deltaTime);
         }
 
-        if (transform.rotation != ship.transform.rotation)
+		if (transform.rotation != Quaternion.identity)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 10);
         }

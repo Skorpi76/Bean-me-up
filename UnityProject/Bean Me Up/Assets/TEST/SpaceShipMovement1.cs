@@ -18,7 +18,7 @@ public class SpaceShipMovement1 : MonoBehaviour
 
 	public bool piloted = false;
 	public bool landed = false;
-	public LaunchPad launchPad;
+	public GameObject launchPad;
     
 
 	private void Start()
@@ -32,6 +32,9 @@ public class SpaceShipMovement1 : MonoBehaviour
 
 	public void EnterShip(){
 
+		Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = false;
+		GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = gameObject.GetComponent<Checkpoint> ();
+
 		if (landed) {
 			TakeOff ();
 		}
@@ -42,7 +45,7 @@ public class SpaceShipMovement1 : MonoBehaviour
 	public void TakeOff(){
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		landed = false;	
-		launchPad.ExitPlanet ();
+		launchPad.GetComponent<LaunchPad>().ExitPlanet ();
 	}
 
 
@@ -53,12 +56,14 @@ public class SpaceShipMovement1 : MonoBehaviour
 		
 			if (Input.GetKeyDown ("f")) {
 				GameObject player = Instantiate (playerPrefab, transform.position + transform.right, transform.rotation) as GameObject;
+
 				player.GetComponent<Rigidbody2D> ().AddForce (rb.velocity.normalized * (rb.velocity.magnitude + 100)); 
+				player.GetComponent<controller> ().ship = gameObject;
 				GetComponent<SpaceShoot> ().enabled = false;
 				piloted = false;
 
 				if (launchPad != null) {
-					launchPad.EnterPlanet ();
+					launchPad.GetComponent<LaunchPad>().EnterPlanet ();
 				}
 			}
 
