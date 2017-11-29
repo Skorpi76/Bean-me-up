@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CandyPlanet.unity
     guid: f3a0dd520f9df9f4ebc82e4b49dade34
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 69e5162de578e3647a836de398b0fd57
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: cd6136cb66c2d6645b4eae1faa3607b5
