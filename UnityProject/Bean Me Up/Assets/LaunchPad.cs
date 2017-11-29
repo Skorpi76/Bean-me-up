@@ -8,7 +8,7 @@ public class LaunchPad : MonoBehaviour {
 
 	public Object level;
 
-	GameObject ship;
+	public GameObject ship;
 
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col){

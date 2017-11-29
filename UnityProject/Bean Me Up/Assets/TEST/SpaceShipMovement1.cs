@@ -36,13 +36,21 @@ public class SpaceShipMovement1 : MonoBehaviour
 		GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = gameObject.GetComponent<Checkpoint> ();
 
 		if (landed) {
+			print ("landed");
 			TakeOff ();
 		}
 		GetComponent<SpaceShoot> ().enabled = true;
+		//piloted = true;
+		StartCoroutine(pilotDelay());
+	}
+
+	IEnumerator pilotDelay(){
+		yield return new WaitForEndOfFrame ();
 		piloted = true;
 	}
 
 	public void TakeOff(){
+		print ("takeoff");
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		landed = false;	
 		launchPad.GetComponent<LaunchPad>().ExitPlanet ();
@@ -55,6 +63,7 @@ public class SpaceShipMovement1 : MonoBehaviour
 		if (piloted) {
 		
 			if (Input.GetKeyDown ("f")) {
+				print ("getout");
 				GameObject player = Instantiate (playerPrefab, transform.position + transform.right, transform.rotation) as GameObject;
 
 				player.GetComponent<Rigidbody2D> ().AddForce (rb.velocity.normalized * (rb.velocity.magnitude + 100)); 
