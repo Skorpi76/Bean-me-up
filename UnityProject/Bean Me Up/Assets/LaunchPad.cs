@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class LaunchPad : MonoBehaviour {
 
 
-	public Object level;
-
+	//public Object level;
+	public string LevelName;
 	public GameObject ship;
 
 	// Use this for initialization
@@ -52,7 +52,7 @@ public class LaunchPad : MonoBehaviour {
 
 	void LoadLevel(){
 
-		SceneManager.LoadScene(level.name, LoadSceneMode.Additive);
+		SceneManager.LoadScene(LevelName, LoadSceneMode.Additive);
 
 	}
 
@@ -62,7 +62,7 @@ public class LaunchPad : MonoBehaviour {
 
 	void UnLoadLevel(){
 
-		SceneManager.UnloadSceneAsync(level.name);
+		SceneManager.UnloadSceneAsync(LevelName);
 
 	}
 
