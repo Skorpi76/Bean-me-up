@@ -13,6 +13,7 @@ public class CameraFollowSpaceShip : MonoBehaviour {
     public bool followPlayer = false;
 	public Camera mapCamera;
     public float planetZoom;
+	public Transform spaceBG;
 
     // Use this for initialization
     void Start()
@@ -23,8 +24,6 @@ public class CameraFollowSpaceShip : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-
 		if (Input.GetKey ("m")) {
 			if (!mapCamera.enabled) {
 				mapCamera.enabled = true;
@@ -67,6 +66,7 @@ public class CameraFollowSpaceShip : MonoBehaviour {
 		}
 		Vector3 newPos = new Vector3(player.transform.position.x, player.transform.position.y, this.transform.position.z);
         this.transform.position = newPos;
+
     }
 
     void FollowShip()

@@ -37,10 +37,13 @@ public class GravitySource : MonoBehaviour {
 
 					//rotation
 					//print (Distance / (range - surfaceRadius - 0.5f));
-					col.transform.rotation = Quaternion.Lerp( Quaternion.AngleAxis (Mathf.Atan2 (Direction.y, Direction.x) * Mathf.Rad2Deg + 90, Vector3.forward), col.transform.rotation , Distance / (range - surfaceRadius) );
+					col.transform.rotation = Quaternion.Lerp (Quaternion.AngleAxis (Mathf.Atan2 (Direction.y, Direction.x) * Mathf.Rad2Deg + 90, Vector3.forward), col.transform.rotation, Distance / (range - surfaceRadius));
 					//col.transform.rotation = Quaternion.AngleAxis (Mathf.Atan2 (Direction.y, Direction.x) * Mathf.Rad2Deg + 90, Vector3.forward);
 					Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = true;
 					Camera.main.GetComponent<CameraFollowSpaceShip> ().player = col.gameObject;
+				}else if(col.tag == "Enemies"){
+					col.attachedRigidbody.AddForce (Direction * (gravityForce/factor) * col.attachedRigidbody.mass * Time.deltaTime);
+					col.transform.rotation = Quaternion.Lerp (Quaternion.AngleAxis (Mathf.Atan2 (Direction.y, Direction.x) * Mathf.Rad2Deg + 90, Vector3.forward), col.transform.rotation, Distance / (range - surfaceRadius));
 				}else{
 
 					col.attachedRigidbody.AddForce (Direction * (gravityForce/factor) * col.attachedRigidbody.mass * Time.deltaTime);

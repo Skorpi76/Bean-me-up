@@ -17,6 +17,7 @@ public class controller : MonoBehaviour {
 	public Transform shipcompass;
 
 	public LayerMask shipLayerMask;
+	public Transform[] rayTrans;
 
 	public int jetPackCharge = 3;
 
@@ -88,8 +89,16 @@ public class controller : MonoBehaviour {
 				falling = false;
 				controlFactor = 1f;
 
-				RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
-				if (horizontalHit.collider == null) {
+				bool hhitbool = false;
+				foreach (Transform t in rayTrans) {
+					RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
+					if (horizontalHit.collider != null) {
+						hhitbool = true;
+						break;
+					}
+				}
+
+				if (!hhitbool) {
 					print ("horizontal ray not hit");
 					localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 				} else {
@@ -108,8 +117,15 @@ public class controller : MonoBehaviour {
 				//raycast to check if we can move to the left or right while falling
 				if (Mathf.Abs (Input.GetAxis ("Horizontal")) > 0) {
 
-					RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
-					if (horizontalHit.collider == null) {
+					bool hhitbool = false;
+					foreach (Transform t in rayTrans) {
+						RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
+						if (horizontalHit.collider != null) {
+							hhitbool = true;
+							break;
+						}
+					}
+					if (!hhitbool) {
 						print ("horizontal ray not hit");
 						localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f + Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 					} else {

@@ -25,7 +25,7 @@ public class SpaceShipMovement1 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         engine = GameObject.FindGameObjectWithTag("Engine");
-        engine.SetActive(true);
+        engine.SetActive(false);
 
     }
 
@@ -78,6 +78,13 @@ public class SpaceShipMovement1 : MonoBehaviour
 
 			transform.Rotate (0, 0, Input.GetAxis ("Horizontal") * -1 * Time.deltaTime * 100);
 
+			if (Input.GetAxis ("Vertical") > 0) {
+				//engine particles 
+				engine.SetActive (true);
+				//fuel 
+			} else {
+				engine.SetActive (false);
+			}
 			rb.AddForce ((transform.up * Input.GetAxis ("Vertical") * Time.deltaTime * 250) + gravityPull);
 		} else {
 			rb.drag = 0.5f;
