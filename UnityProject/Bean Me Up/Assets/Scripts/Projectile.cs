@@ -7,6 +7,12 @@ public class Projectile : MonoBehaviour {
     public float speed = 10;
     public int damage = -10;
 
+
+    private void Start()
+    {
+        Destroy(gameObject, 6);
+    }
+
     public void Launch()
     {
         rb = GetComponent<Rigidbody2D>();
