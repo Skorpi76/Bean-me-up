@@ -9,6 +9,8 @@ public class LaunchPad : MonoBehaviour {
 	//public Object level;
 	public string LevelName;
 	public GameObject ship;
+    public Checkpoint shipCheckpoint;
+    public Checkpoint playerCheckpoint;
 
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col){
@@ -36,8 +38,9 @@ public class LaunchPad : MonoBehaviour {
 
 	public void ExitPlanet(){
 		UnLoadLevel ();
+        GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().shipCheckpoint = shipCheckpoint;
 
-	}
+    }
 
 	public void EnterPlanet(){
 		ship.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Static;
@@ -47,7 +50,8 @@ public class LaunchPad : MonoBehaviour {
 		ship.GetComponent<SpaceShipMovement1> ().launchPad = gameObject;
 
 		LoadLevel ();
-		GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = gameObject.GetComponent<Checkpoint> ();
+        GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().shipCheckpoint = shipCheckpoint;
+        GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = playerCheckpoint;
 	}
 
 	void LoadLevel(){

@@ -23,6 +23,8 @@ public class controller : MonoBehaviour {
 
     public float fuelCollected = 0;
 
+    public GameObject spaceCanvas;
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
@@ -43,17 +45,43 @@ public class controller : MonoBehaviour {
 		}
 
 		if (inSpace) {
-		//space movement
+            //space movement
+            spaceCanvas.SetActive(true);
+            if (jetPackCharge == 0) {
+                spaceCanvas.transform.GetChild(0).gameObject.SetActive(false);
+                spaceCanvas.transform.GetChild(1).gameObject.SetActive(false);
+                spaceCanvas.transform.GetChild(2).gameObject.SetActive(false);
+            } else if (jetPackCharge == 1) {
+                spaceCanvas.transform.GetChild(0).gameObject.SetActive(true);
+                spaceCanvas.transform.GetChild(1).gameObject.SetActive(false);
+                spaceCanvas.transform.GetChild(2).gameObject.SetActive(false);
+            }
+            else if (jetPackCharge == 2)
+            {
+                spaceCanvas.transform.GetChild(0).gameObject.SetActive(true);
+                spaceCanvas.transform.GetChild(1).gameObject.SetActive(true);
+                spaceCanvas.transform.GetChild(2).gameObject.SetActive(false);
+            }
+            else if (jetPackCharge == 3)
+            {
+                spaceCanvas.transform.GetChild(0).gameObject.SetActive(true);
+                spaceCanvas.transform.GetChild(1).gameObject.SetActive(true);
+                spaceCanvas.transform.GetChild(2).gameObject.SetActive(true);
+            }
 
-			Vector3 dir = (transform.position - ship.transform.position).normalized;
-			shipcompass.rotation = Quaternion.LookRotation (dir, Vector3.up);
-			shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+//            Vector3 dir = (transform.position - ship.transform.position).normalized;
+	//		shipcompass.rotation = Quaternion.LookRotation (dir, Vector3.up);
+		//	shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
-			//rotation
-			transform.Rotate (0, 0, Input.GetAxis ("Horizontal") * -1 * Time.deltaTime * 60);
+            //rotation
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0) {
+                rb.angularVelocity = 0;
+                transform.Rotate(0, 0, Input.GetAxis("Horizontal") * -1 * Time.deltaTime * 60);
+            }
+			
 
 			if (Input.GetKeyDown ("space") && jetPackCharge > 0) {
-				rb.AddForce (transform.up * 100);
+				rb.AddForce (transform.up * 60);
 				jetPackCharge--;
 				StartCoroutine(JetPackReCharge());
 			}
@@ -68,8 +96,9 @@ public class controller : MonoBehaviour {
 
 
 		} else {
-		//planet movement
-			shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            //planet movement
+            spaceCanvas.SetActive(false);
+            shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			//jump
 			if (Input.GetKeyDown ("space") && !falling) {
 				rb.AddForce (transform.up * 150);
@@ -101,10 +130,8 @@ public class controller : MonoBehaviour {
 				}
 
 				if (!hhitbool) {
-					print ("horizontal ray not hit");
 					localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 				} else {
-					print ("horizontal ray  hit");
 					localSpaceVelocity = new Vector3 (localSpaceVelocity.x, localSpaceVelocity.y, 0);
 				}
 
@@ -128,10 +155,8 @@ public class controller : MonoBehaviour {
 						}
 					}
 					if (!hhitbool) {
-						print ("horizontal ray not hit");
 						localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f + Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 					} else {
-						print ("horizontal ray  hit");
 						localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f , localSpaceVelocity.y, 0);
 					}
 
@@ -139,10 +164,6 @@ public class controller : MonoBehaviour {
 					localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f , localSpaceVelocity.y, 0);
 				}
 
-
-
-
-				//localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f + Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 			}
 
 			//re-apply updated velocity

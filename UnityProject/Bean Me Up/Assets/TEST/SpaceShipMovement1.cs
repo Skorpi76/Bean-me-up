@@ -39,11 +39,16 @@ public class SpaceShipMovement1 : MonoBehaviour
 
 	public void EnterShip(){
 
-		Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = false;
+        if (engine == null)
+        {
+            engine = GameObject.FindGameObjectWithTag("Engine");
+            engine.SetActive(false);
+        }
+
+        Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = false;
 		GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = gameObject.GetComponent<Checkpoint> ();
 
 		if (landed) {
-			print ("landed");
 			TakeOff ();
 		}
 		GetComponent<SpaceShoot> ().enabled = true;
@@ -55,11 +60,11 @@ public class SpaceShipMovement1 : MonoBehaviour
 
 	IEnumerator pilotDelay(){
 		yield return new WaitForEndOfFrame ();
-		piloted = true;
+        yield return new WaitForEndOfFrame();
+        piloted = true;
 	}
 
 	public void TakeOff(){
-		print ("takeoff");
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		landed = false;	
 		launchPad.GetComponent<LaunchPad>().ExitPlanet ();
@@ -70,8 +75,13 @@ public class SpaceShipMovement1 : MonoBehaviour
 	{
 
 		if (piloted) {
-		
-			if (Input.GetKeyDown ("f")) {
+
+            if (Input.GetKeyDown("r"))
+            {
+                GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().RespawnShip();
+            }
+
+            if (Input.GetKeyDown ("f")) {
 				print ("getout");
 				GameObject player = Instantiate (playerPrefab, transform.position + transform.right, transform.rotation) as GameObject;
 

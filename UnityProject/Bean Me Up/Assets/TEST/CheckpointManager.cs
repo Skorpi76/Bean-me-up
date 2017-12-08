@@ -28,7 +28,10 @@ public class CheckpointManager : MonoBehaviour {
 
 	}
 
-	public void RespawnShip(){}
+	public void RespawnShip(){
+
+        shipCheckpoint.Respawn();
+    }
 
 	public void NewPlayerCheckpoint(){}
 

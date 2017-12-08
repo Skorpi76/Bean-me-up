@@ -177,7 +177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1559132064695474
 GameObject:
   m_ObjectHideFlags: 1
@@ -327,8 +327,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555728841285794}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 447.1, y: 4.6, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.16737469, w: 0.98589337}
+  m_LocalPosition: {x: 494.74, y: 60.67, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4640258763870262}
@@ -703,7 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pRespawnMode: 1
-  respawn: 1
+  spawnPlayerType: 0
+  fuelSaved: 0
 --- !u!114 &114573659888863806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -726,9 +727,9 @@ MonoBehaviour:
   piloted: 0
   landed: 1
   launchPad: {fileID: 0}
-  Canvas: {fileID: 0}
+  Canvas: {fileID: 1636742684431436}
   fuel: 100
-  fuelSlider: {fileID: 0}
+  fuelSlider: {fileID: 114415384212823946}
 --- !u!114 &114595136740721748
 MonoBehaviour:
   m_ObjectHideFlags: 1

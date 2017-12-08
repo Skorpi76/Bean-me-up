@@ -52,7 +52,7 @@ public class Instruction : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerEnter2D (Collider2D col) {
 
-		if (col.tag == "Player") {
+		if (col.tag == "Player" || col.tag=="Ship") {
 			activated = true;
 			StartCoroutine (FadeIn ());
 		}
@@ -61,7 +61,7 @@ public class Instruction : MonoBehaviour {
 
 	void OnTriggerExit2D (Collider2D col) {
 
-		if (col.tag == "Player") {
+		if (col.tag == "Player" || col.tag == "Ship") {
 			activated = false;
 			StartCoroutine (FadeOut ());
 		}

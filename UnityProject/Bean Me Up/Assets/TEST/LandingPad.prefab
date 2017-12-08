@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 61778822564572020}
   - component: {fileID: 114450420218873092}
   - component: {fileID: 114227839221946328}
+  - component: {fileID: 114887388134120342}
   m_Layer: 12
   m_Name: LandingPad
   m_TagString: Untagged
@@ -148,7 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pRespawnMode: 0
-  respawn: 1
+  spawnPlayerType: 0
+  fuelSaved: 0
 --- !u!114 &114450420218873092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,7 +162,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3bef7631ee8a146986b4f7f82bc194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: {fileID: 0}
+  LevelName: 
+  ship: {fileID: 0}
+  shipCheckpoint: {fileID: 114887388134120342}
+  playerCheckpoint: {fileID: 114227839221946328}
+--- !u!114 &114887388134120342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1803448405481656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f73572707a01e459d376bb92c770f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pRespawnMode: 1
+  spawnPlayerType: 0
+  fuelSaved: 0
 --- !u!212 &212641713315552060
 SpriteRenderer:
   m_ObjectHideFlags: 1
