@@ -7,6 +7,7 @@ public class Checkpoint : MonoBehaviour {
 
 	public PlayerRespawnMode pRespawnMode;
 	public Respawn respawn;
+    public float fuelSaved = 0;
 
 	// Use this for initialization
 	public void Respawn(){
@@ -18,10 +19,10 @@ public class Checkpoint : MonoBehaviour {
 			break;
 		case PlayerRespawnMode.AtPosition:
 			Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = true;
-
 			GameObject player = Instantiate (GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerPrefab, transform.position + transform.right, transform.rotation) as GameObject;
 			player.GetComponent<controller> ().ship = Camera.main.GetComponent<CameraFollowSpaceShip> ().ship;
-			Camera.main.GetComponent<CameraFollowSpaceShip> ().player = player;
+            player.GetComponent<controller>().fuelCollected = fuelSaved;
+            Camera.main.GetComponent<CameraFollowSpaceShip> ().player = player;
 			break;
 		}
 	}

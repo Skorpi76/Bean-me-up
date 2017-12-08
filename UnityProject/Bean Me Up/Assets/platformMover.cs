@@ -13,7 +13,7 @@ public class platformMover : MonoBehaviour {
 	void Start () {
 	
 		startPos = transform.position;	
-		targetPos = endPosition;
+		targetPos = endPosition.position;
 	}
 	
 	// Update is called once per frame

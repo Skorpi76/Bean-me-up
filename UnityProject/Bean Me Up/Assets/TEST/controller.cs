@@ -21,6 +21,8 @@ public class controller : MonoBehaviour {
 
 	public int jetPackCharge = 3;
 
+    public float fuelCollected = 0;
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
@@ -155,8 +157,15 @@ public class controller : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.CircleCast (transform.position, 2, transform.forward, 10, shipLayerMask);
 			if (hit.collider != null) {
 				if (hit.collider.tag == "Ship") {
+                    if(fuelCollected > 0)
+                    {
+                        hit.collider.GetComponent<SpaceShipMovement1>().fuel += fuelCollected;
+                        if (hit.collider.GetComponent<SpaceShipMovement1>().fuel > 100) {
+                            hit.collider.GetComponent<SpaceShipMovement1>().fuel = 100;
+                        }
+                    }
 
-					hit.collider.GetComponent<SpaceShipMovement1> ().EnterShip ();
+                    hit.collider.GetComponent<SpaceShipMovement1> ().EnterShip ();
 					Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = false;
 					Destroy (gameObject);
 				

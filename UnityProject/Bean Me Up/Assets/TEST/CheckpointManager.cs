@@ -10,6 +10,7 @@ public class CheckpointManager : MonoBehaviour {
 	public GameObject playerPrefab;
 	public GameObject shipPrefab;
 
+
 	// Use this for initialization
 	void Start () {
 		

@@ -18,6 +18,7 @@ public class Flag : MonoBehaviour {
 			print ("Go green");
 			activated = true;
 			GetComponent<SpriteRenderer> ().sprite = greenFlag;
+            GetComponent<Checkpoint>().fuelSaved = col.GetComponent<controller>().fuelCollected;
 			GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = gameObject.GetComponent<Checkpoint> ();
 		
 		}
