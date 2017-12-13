@@ -703,7 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pRespawnMode: 1
-  spawnPlayerType: 0
+  spawnPlayerType: 1
   fuelSaved: 0
 --- !u!114 &114573659888863806
 MonoBehaviour:

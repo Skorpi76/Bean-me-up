@@ -7,6 +7,7 @@ public class Instruction : MonoBehaviour {
 
 	bool activated = false;
 	public bool StartActive = false;
+	public TutorialType tutType = TutorialType.Player;
 
 	// Use this for initialization
 	void Start () {
@@ -52,7 +53,11 @@ public class Instruction : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerEnter2D (Collider2D col) {
 
-		if (col.tag == "Player" || col.tag=="Ship") {
+		if (col.tag == "Player" && tutType==TutorialType.Player) {
+			activated = true;
+			StartCoroutine (FadeIn ());
+		}
+		if (col.tag == "Ship" && tutType==TutorialType.Ship) {
 			activated = true;
 			StartCoroutine (FadeIn ());
 		}
@@ -61,10 +66,18 @@ public class Instruction : MonoBehaviour {
 
 	void OnTriggerExit2D (Collider2D col) {
 
-		if (col.tag == "Player" || col.tag == "Ship") {
+		if (col.tag == "Player" && tutType == TutorialType.Player) {
+			activated = false;
+			StartCoroutine (FadeOut ());
+		}
+		if (col.tag == "Ship" && tutType == TutorialType.Ship) {
 			activated = false;
 			StartCoroutine (FadeOut ());
 		}
 
 	}
+}
+public enum TutorialType{
+	Player,
+	Ship
 }

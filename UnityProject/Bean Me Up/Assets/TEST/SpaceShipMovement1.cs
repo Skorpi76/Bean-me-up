@@ -101,7 +101,7 @@ public class SpaceShipMovement1 : MonoBehaviour
 			if (Input.GetAxis ("Vertical") > 0 && fuel > 0) {
 				//engine particles 
 				engine.SetActive (true);
-                fuel -= 2 * Time.deltaTime;
+                fuel -= 1.5f * Time.deltaTime;
 
                 fuelSlider.value = fuel;
                 rb.AddForce((transform.up * Input.GetAxis("Vertical") * Time.deltaTime * 250) + gravityPull);
