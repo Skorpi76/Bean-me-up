@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114279775363668114}
   - component: {fileID: 114440541898436304}
   - component: {fileID: 50201518493784888}
+  - component: {fileID: 114320178698545570}
   m_Layer: 14
   m_Name: SpaceMold
   m_TagString: Enemies
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613334065901510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 569.2987, y: 72.44561, z: 0}
+  m_LocalPosition: {x: 573.62476, y: 97.1861, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,6 +95,18 @@ MonoBehaviour:
   moldProjectile: {fileID: 1461302831552362, guid: 85f6645be1952094cb25f63a81ba3c28,
     type: 2}
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &114320178698545570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613334065901510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a701f0e120394e4998d51c7a988fa93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Respawner: {fileID: 0}
 --- !u!114 &114440541898436304
 MonoBehaviour:
   m_ObjectHideFlags: 1

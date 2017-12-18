@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 60764323345475884}
   - component: {fileID: 50976661608981242}
   - component: {fileID: 114262872607421518}
+  - component: {fileID: 114561995414397176}
   m_Layer: 0
   m_Name: gasSprite
   m_TagString: Untagged
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8cdb72feb9b9b4e85ebf015d9307ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114561995414397176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329130895963298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a701f0e120394e4998d51c7a988fa93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Respawner: {fileID: 0}
 --- !u!212 &212111463803295716
 SpriteRenderer:
   m_ObjectHideFlags: 1
