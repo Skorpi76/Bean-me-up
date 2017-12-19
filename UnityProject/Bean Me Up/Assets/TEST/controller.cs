@@ -17,7 +17,7 @@ public class controller : MonoBehaviour {
 	public Transform shipcompass;
 
 	public LayerMask shipLayerMask;
-	public Transform[] rayTrans;
+	public GameObject rayTrans;
 
 	public int jetPackCharge = 3;
 
@@ -101,7 +101,7 @@ public class controller : MonoBehaviour {
             shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			//jump
 			if (Input.GetKeyDown ("space") && !falling) {
-				rb.AddForce (transform.up * 150);
+				rb.AddForce (transform.up * 165);
 			}
 
 			//gravity
@@ -120,16 +120,21 @@ public class controller : MonoBehaviour {
 				falling = false;
 				controlFactor = 1f;
 
-				bool hhitbool = false;
-				foreach (Transform t in rayTrans) {
-					RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
-					if (horizontalHit.collider != null) {
-						hhitbool = true;
-						break;
-					}
-				}
+                bool hhitbool = false;
+                Transform[] allChildren = rayTrans.GetComponentsInChildren<Transform>();
+                
+                foreach (Transform p in allChildren)
+                {
+                    RaycastHit2D horizontalHit = Physics2D.Raycast(p.position, transform.right * Input.GetAxis("Horizontal"), .6f, walkLayer);
+                    Debug.DrawRay(p.position, transform.right * Input.GetAxis("Horizontal"), Color.red, 1);
+                    if (horizontalHit.collider != null)
+                    {
+                        hhitbool = true;
+                        break;
+                    }
+                }
 
-				if (!hhitbool) {
+                if (!hhitbool) {
 					localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 				} else {
 					localSpaceVelocity = new Vector3 (localSpaceVelocity.x, localSpaceVelocity.y, 0);
@@ -147,14 +152,18 @@ public class controller : MonoBehaviour {
 				if (Mathf.Abs (Input.GetAxis ("Horizontal")) > 0) {
 
 					bool hhitbool = false;
-					foreach (Transform t in rayTrans) {
-						RaycastHit2D horizontalHit = Physics2D.Raycast (transform.position, transform.right * Input.GetAxis ("Horizontal"), .6f, walkLayer);
-						if (horizontalHit.collider != null) {
-							hhitbool = true;
-							break;
-						}
-					}
-					if (!hhitbool) {
+                    Transform[] allChildren = rayTrans.GetComponentsInChildren<Transform>();
+                    foreach (Transform p in allChildren)
+                    {
+                        RaycastHit2D horizontalHit = Physics2D.Raycast(p.position, transform.right * Input.GetAxis("Horizontal"), .6f, walkLayer);
+                        Debug.DrawRay(p.position, transform.right * Input.GetAxis("Horizontal"), Color.red, 1);
+                        if (horizontalHit.collider != null)
+                        {
+                            hhitbool = true;
+                            break;
+                        }
+                    }
+                    if (!hhitbool) {
 						localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f + Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
 					} else {
 						localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f , localSpaceVelocity.y, 0);

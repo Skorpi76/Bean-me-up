@@ -10,9 +10,13 @@ public class SpawnController : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void OnDestroy () {
-		Respawner.StartRespawn ();
-	}
+
+    // Update is called once per frame
+    void OnDestroy()
+    {
+        if (Respawner != null)
+        {
+            Respawner.StartRespawn();
+        }
+    }
 }
