@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224316752169652912}
   - component: {fileID: 114749751472860664}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 1537723585662962}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.07332357, y: 0.08000183, z: 0}
-  m_LocalScale: {x: 0.668836, y: 0.9225318, z: 1.3837976}
+  m_LocalScale: {x: 1.0052344, y: 1.3865296, z: 2.0797942}
   m_Children: []
   m_Father: {fileID: 4561123039978130}
   m_RootOrder: 2
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.31034467, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.020689487, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -729,6 +729,7 @@ MonoBehaviour:
   launchPad: {fileID: 0}
   Canvas: {fileID: 1636742684431436}
   fuel: 100
+  Maxfuel: 100
   fuelSlider: {fileID: 114415384212823946}
 --- !u!114 &114595136740721748
 MonoBehaviour:
@@ -763,7 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.83823526, b: 0.31795132, a: 1}
+  m_Color: {r: 0, g: 0.83823526, b: 0.14452335, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -841,7 +842,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 114289574768735584}
   m_FillRect: {fileID: 224906576615445878}
   m_HandleRect: {fileID: 224887810518220148}
@@ -849,7 +850,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 63.5
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -897,7 +898,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 82a79cac1122aec4e86e6070ec065c84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b836e23d2844b443bbae15e5c946aff, type: 3}
   m_Color: {r: 1, g: 0.51724136, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

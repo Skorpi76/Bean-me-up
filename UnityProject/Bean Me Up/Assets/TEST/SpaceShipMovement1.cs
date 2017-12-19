@@ -24,6 +24,7 @@ public class SpaceShipMovement1 : MonoBehaviour
     public GameObject Canvas;
 
     public float fuel = 100;
+    public float Maxfuel = 100;
     public Slider fuelSlider;
     
 
@@ -65,6 +66,7 @@ public class SpaceShipMovement1 : MonoBehaviour
 	}
 
 	public void TakeOff(){
+        fuel = Maxfuel;
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		landed = false;	
 		launchPad.GetComponent<LaunchPad>().ExitPlanet ();

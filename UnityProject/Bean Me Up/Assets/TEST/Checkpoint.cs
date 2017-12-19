@@ -18,7 +18,7 @@ public class Checkpoint : MonoBehaviour {
                 ship.transform.rotation = transform.rotation;
                 ship.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 ship.GetComponent<SpaceShipMovement1>().fuel = 100;
-                ship.GetComponent<Entity>().health = ship.GetComponent<Entity>().maxHealth;
+                ship.GetComponent<Entity>().ResetHealth();
                 break;
             case RespawnType.Player:
 

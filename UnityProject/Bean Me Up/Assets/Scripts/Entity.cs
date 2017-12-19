@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Entity : MonoBehaviour {
@@ -12,10 +13,24 @@ public class Entity : MonoBehaviour {
         health = maxHealth;	
 	}
 
+    public void ResetHealth() {
+        health = maxHealth;
+        if (gameObject.tag == "Ship")
+        {
+            transform.Find("Canvas").Find("Health").gameObject.GetComponent<Slider>().value = health;
+        }
+    }
+
     public virtual void ModifyHealth(int amount)
     {
        
         health += amount;
+        if (gameObject.tag == "Ship") {
+            if (gameObject.GetComponent<SpaceShipMovement1>().piloted)
+            {
+                transform.Find("Canvas").Find("Health").gameObject.GetComponent<Slider>().value = health;
+            }
+        }
         Debug.Log(health);
         if (health <= 0)
         {
@@ -29,7 +44,17 @@ public class Entity : MonoBehaviour {
     }
     public virtual void OnDeath()
     {
-        Destroy(this.gameObject);      
+        if (gameObject.tag == "Ship")
+        {
+            GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().RespawnShip();
+        }
+        else if (gameObject.tag == "Player") {
+            GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().RespawnPlayer();
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }
