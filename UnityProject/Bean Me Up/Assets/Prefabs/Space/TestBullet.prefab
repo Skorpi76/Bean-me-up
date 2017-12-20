@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114658136698135288}
   - component: {fileID: 114123089735603262}
   - component: {fileID: 61127118641137528}
+  - component: {fileID: 210535483040879056}
   m_Layer: 11
   m_Name: TestBullet
   m_TagString: Untagged
@@ -127,6 +128,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 1.5
+--- !u!210 &210535483040879056
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1322027458049948}
+  m_Enabled: 1
+  m_SortingLayerID: -886039557
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!212 &212506596255280048
 SpriteRenderer:
   m_ObjectHideFlags: 1
