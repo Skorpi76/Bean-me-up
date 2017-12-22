@@ -3855,6 +3855,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questCanvas: {fileID: 997739726}
+  PlanetCount: 0
+  EnemyCount: 0
 --- !u!1 &434573911
 GameObject:
   m_ObjectHideFlags: 0

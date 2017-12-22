@@ -5,6 +5,9 @@ using UnityEngine;
 public class QuestLogController : MonoBehaviour {
 
     public Canvas questCanvas;
+	public int PlanetCount;
+	public int EnemyCount;
+
 
 	// Use this for initialization
 	void Start () {
