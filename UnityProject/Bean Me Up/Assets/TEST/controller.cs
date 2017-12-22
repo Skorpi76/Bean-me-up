@@ -102,7 +102,8 @@ public class controller : MonoBehaviour {
 			//jump
 			if (Input.GetKeyDown ("space") && !falling) {
 				rb.AddForce (transform.up * 165);
-			}
+                GetComponent<Animator>().SetTrigger("Jump");
+            }
 
 			//gravity
 			rb.AddForce (gravityPull);
@@ -118,7 +119,8 @@ public class controller : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.Raycast (transform.position, transform.up * -1, 1.2f, walkLayer);
 			if (hit.collider != null) {
 				falling = false;
-				controlFactor = 1f;
+                GetComponent<Animator>().SetBool("falling",false);
+                controlFactor = 1f;
 
                 bool hhitbool = false;
                 Transform[] allChildren = rayTrans.GetComponentsInChildren<Transform>();
@@ -140,13 +142,17 @@ public class controller : MonoBehaviour {
 					localSpaceVelocity = new Vector3 (localSpaceVelocity.x, localSpaceVelocity.y, 0);
 				}
 
+                GetComponent<Animator>().SetFloat("xInput", Input.GetAxis("Horizontal"));
+                GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
 
-				//localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
-				//rb.MovePosition( (transform.position + (transform.right * Input.GetAxis ("Horizontal") * Time.deltaTime * 4)));
+                //localSpaceVelocity = new Vector3 (Input.GetAxis ("Horizontal") * Time.deltaTime * 200 * controlFactor, localSpaceVelocity.y, 0);
+                //rb.MovePosition( (transform.position + (transform.right * Input.GetAxis ("Horizontal") * Time.deltaTime * 4)));
 
-			} else {
-
-				falling = true;
+            } else {
+                GetComponent<Animator>().SetBool("falling", true);
+                GetComponent<Animator>().SetFloat("xInput", Input.GetAxis("Horizontal"));
+                GetComponent<Animator>().SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
+                falling = true;
 				controlFactor = 0.8f;
 				//raycast to check if we can move to the left or right while falling
 				if (Mathf.Abs (Input.GetAxis ("Horizontal")) > 0) {
