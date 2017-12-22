@@ -23,6 +23,7 @@ public class slugMovement : MonoBehaviour {
 	}
 
 	void InchAgain(){
+		GetComponent<Animator> ().SetTrigger ("Slide");
 		StartCoroutine (InchMove ());
 	}
 
@@ -33,6 +34,7 @@ public class slugMovement : MonoBehaviour {
 		if (hit.collider != null) {
 			print ("hit a wall");
 			dir.x = dir.x * -1;
+			GetComponent<SpriteRenderer> ().flipX = !GetComponent<SpriteRenderer> ().flipX;
 		}
 		InchAgain ();
 	}
