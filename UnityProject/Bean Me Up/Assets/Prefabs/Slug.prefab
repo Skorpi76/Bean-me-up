@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114748336002809920}
   - component: {fileID: 198477249779293782}
   - component: {fileID: 199575408720329958}
+  - component: {fileID: 95493488246948064}
   m_Layer: 14
   m_Name: Slug
   m_TagString: Enemies
@@ -38,9 +39,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1375080722195048}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 483.498, y: 59.055, z: 0}
-  m_LocalScale: {x: 0.036485292, y: 0.036485292, z: 0.036485292}
+  m_LocalRotation: {x: -0, y: -0, z: -0.99769723, w: -0.06782523}
+  m_LocalPosition: {x: -1.3299866, y: -15.75, z: 0}
+  m_LocalScale: {x: 0.036485307, y: 0.036485307, z: 0.036485292}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,6 +81,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 15.058824
+--- !u!95 &95493488246948064
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1375080722195048}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a8f2e69135557b7499849eceaf439bc7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114748336002809920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,7 +173,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 579640759
+  randomSeed: 1527679322
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3465,8 +3483,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3dc75711c3055574283d77d7645e6922, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: c408755494a8c29448bf2ec2ff66cc36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

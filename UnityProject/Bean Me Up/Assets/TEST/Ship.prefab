@@ -328,7 +328,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555728841285794}
   m_LocalRotation: {x: -0, y: -0, z: -0.16737469, w: 0.98589337}
-  m_LocalPosition: {x: 494.74, y: 60.67, z: 0}
+  m_LocalPosition: {x: 494.6, y: 60.65, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4640258763870262}
@@ -664,7 +664,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 114038366152855834}
   m_FillRect: {fileID: 224275343697371754}
   m_HandleRect: {fileID: 224117748965739274}

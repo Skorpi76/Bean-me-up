@@ -24,14 +24,19 @@ public class Entity : MonoBehaviour {
     public virtual void ModifyHealth(int amount)
     {
        
-        health += amount;
-        if (gameObject.tag == "Ship") {
-            if (gameObject.GetComponent<SpaceShipMovement1>().piloted)
-            {
-                transform.Find("Canvas").Find("Health").gameObject.GetComponent<Slider>().value = health;
-            }
-        }
-        Debug.Log(health);
+        
+		if (gameObject.tag == "Ship") {
+			if (gameObject.GetComponent<SpaceShipMovement1> ().piloted) {
+				health += amount;
+				transform.Find ("Canvas").Find ("Health").gameObject.GetComponent<Slider> ().value = health;
+			}
+		}
+		else if(gameObject.tag == "Player"){
+			health += amount;
+			transform.Find ("HealthCanvas").Find ("Health").gameObject.GetComponent<Slider> ().value = health;
+		}else {
+			health += amount;
+		}
         if (health <= 0)
         {
             health = 0;

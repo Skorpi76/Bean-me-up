@@ -27,6 +27,14 @@ public class slugMovement : MonoBehaviour {
 		StartCoroutine (InchMove ());
 	}
 
+	void OnCollisionEnter2D(Collision2D collision){
+		if (collision.collider.tag == "Player") {
+			collision.collider.GetComponent<Entity> ().ModifyHealth (-15);
+		
+		} 
+	
+	}
+
 	IEnumerator InchMove(){
 		rb.AddForce (transform.right * dir.x * inchAmount);
 		yield return new WaitForSeconds (waitAmount);
