@@ -814,8 +814,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 616511067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 968, y: 282, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.84762853, w: 0.53059024}
+  m_LocalPosition: {x: 695, y: -120, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 362989703}
@@ -831,7 +831,7 @@ Transform:
   - {fileID: 541327670}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 115.909004}
 --- !u!210 &616511069
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -1840,7 +1840,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 982.1, y: 271.24}
+  m_ConnectedAnchor: {x: 698.5175, y: -102.61567}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
