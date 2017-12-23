@@ -17,6 +17,23 @@ public class QuestLogController : MonoBehaviour {
 	public GameObject NotificationPrefab;
 	GameObject notificationReference;
 
+	public bool[] boosterCollected = new bool[]{
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false
+	};
+
 	// Use this for initialization
 	void Start () {
 		
@@ -39,8 +56,9 @@ public class QuestLogController : MonoBehaviour {
 		}
 	}
 
-	public void AddBeanBooster(){
+	public void AddBeanBooster(int ID){
 		BoosterCount++;
+		boosterCollected [ID] = true;
 		if (BoosterCount < 15) {
 			boosterText.GetComponent<TextMeshProUGUI>().text = "- Collect all of the bean boosters\n\t " + BoosterCount + " of 15";
 			CreateNotification (BoosterCount + " out of 15 boosters collected.");

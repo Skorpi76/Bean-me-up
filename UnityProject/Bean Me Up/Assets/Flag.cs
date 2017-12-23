@@ -12,10 +12,8 @@ public class Flag : MonoBehaviour {
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col){
 
-		print ("trigger enter");
 
 		if (col.tag == "Player" && !activated) {
-			print ("Go green");
 			activated = true;
 			GetComponent<SpriteRenderer> ().sprite = greenFlag;
             GetComponent<Checkpoint>().fuelSaved = col.GetComponent<controller>().fuelCollected;
