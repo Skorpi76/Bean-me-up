@@ -11,6 +11,7 @@ public class LaunchPad : MonoBehaviour {
 	public GameObject ship;
     public Checkpoint shipCheckpoint;
     public Checkpoint playerCheckpoint;
+	public bool visited = false;
 
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col){
@@ -52,6 +53,11 @@ public class LaunchPad : MonoBehaviour {
 		LoadLevel ();
         GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().shipCheckpoint = shipCheckpoint;
         GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().playerCheckpoint = playerCheckpoint;
+
+		if (visited == false) {
+			visited = true;
+			Camera.main.GetComponent<QuestLogController> ().NewPlanet ();
+		}
 	}
 
 	void LoadLevel(){

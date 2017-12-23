@@ -58,6 +58,7 @@ public class Entity : MonoBehaviour {
         }
         else
         {
+			Camera.main.GetComponent<QuestLogController> ().AddEnemy ();
             Destroy(this.gameObject);
         }
     }
