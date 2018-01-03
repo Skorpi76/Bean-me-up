@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class keyLock : MonoBehaviour {
 
-	public keyHole[] keyHoles;
+    public keyHole[] keyHoles;
+
 	// Use this for initialization
 	void Start () {
 		
