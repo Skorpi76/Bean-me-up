@@ -6,9 +6,9 @@ public class BoosterSpawner : MonoBehaviour {
 
 	public int boosterId;
 	public GameObject boosterPrefab;
-
-	// Use this for initialization
-	void Start () {
+    public bool destroyOnPlanetUnload = false;
+    // Use this for initialization
+    void Start () {
 		Spawn();
 	}
 
@@ -19,7 +19,8 @@ public class BoosterSpawner : MonoBehaviour {
 			Debug.Log ("SpawnBooster");
 			GameObject boosterReference = Instantiate (boosterPrefab,transform.position,transform.rotation) as GameObject;
 			boosterReference.GetComponent<Booster> ().ID = boosterId;
-		}
+            boosterReference.GetComponent<Booster>().destroyOnPlanetLeave = destroyOnPlanetUnload;
+        }
 
 	}
 

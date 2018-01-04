@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Booster : MonoBehaviour {
 	public int ID;
+    public bool destroyOnPlanetLeave = false;
 	// Use this for initialization
 	void Start () {
 		

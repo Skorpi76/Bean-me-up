@@ -8,9 +8,26 @@ public class Entity : MonoBehaviour {
     public int maxHealth;
     public int health;
 
+
+	bool hasWorldHealthBar = false;
+	Transform canvas;
     // Use this for initialization
     void Start () {
         health = maxHealth;	
+		if (gameObject.transform.Find ("Canvas")) {
+			Debug.Log ("Has world health bar");
+			hasWorldHealthBar = true;
+			canvas = gameObject.transform.Find ("Canvas");
+			canvas.transform.Find("Health").gameObject.GetComponent<Slider> ().maxValue = maxHealth;
+			canvas.transform.Find("Health").gameObject.GetComponent<Slider> ().value = health;
+		}
+	}
+
+
+	void Update(){
+		if (hasWorldHealthBar) {
+			canvas.rotation = Quaternion.identity;
+		}
 	}
 
     public void ResetHealth() {
@@ -34,7 +51,11 @@ public class Entity : MonoBehaviour {
 		else if(gameObject.tag == "Player"){
 			health += amount;
 			transform.Find ("HealthCanvas").Find ("Health").gameObject.GetComponent<Slider> ().value = health;
-		}else {
+		}else if(hasWorldHealthBar){
+			health += amount;
+			canvas.transform.Find("Health").gameObject.GetComponent<Slider> ().value = health;
+		}
+		else{
 			health += amount;
 		}
         if (health <= 0)
