@@ -8,6 +8,7 @@ TagManager:
   - PlanetLand
   - Ship
   - Enemies
+  - Map
   layers:
   - Default
   - TransparentFX

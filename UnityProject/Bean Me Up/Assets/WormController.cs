@@ -12,6 +12,7 @@ public class WormController : MonoBehaviour {
 	public float pursueDistance = 10;
 
 	Quaternion targetRotation;
+	bool hasMoved = false;
 
 	public float damageAmount;
 
@@ -29,12 +30,15 @@ public class WormController : MonoBehaviour {
 	}
 
 	void Update(){
+		if (targetRotation.x != 0 || targetRotation.y != 0 || targetRotation.z != 0 || targetRotation.w != 0) {
+			transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, 15 * Time.deltaTime);
+		}
 
-		transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, 15 * Time.deltaTime);
 	}
 
 	// Update is called once per frame
 	void MoveAgain () {
+		
 		StartCoroutine (Move ());
 	}
 
@@ -76,7 +80,7 @@ public class WormController : MonoBehaviour {
 
 		}
 
-
+		hasMoved = true;
 		MoveAgain ();
 	}
 

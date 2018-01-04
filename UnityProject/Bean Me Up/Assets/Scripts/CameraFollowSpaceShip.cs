@@ -52,7 +52,7 @@ public class CameraFollowSpaceShip : MonoBehaviour {
 			}
 
 			if (transform.rotation != player.transform.rotation) {
-				transform.rotation = Quaternion.Lerp (transform.rotation, player.transform.rotation, Time.deltaTime * 10);
+				transform.rotation = Quaternion.Lerp (transform.rotation, player.transform.rotation, Time.deltaTime * 2);
 			}
 		} else {
 			if (Camera.main.orthographicSize != 20)

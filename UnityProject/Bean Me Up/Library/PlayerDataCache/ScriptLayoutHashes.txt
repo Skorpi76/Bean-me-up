@@ -1,5 +1,5 @@
 WindowsStandalone
-dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
+739d036e4b0d865c154b6a376281c995 Assembly-CSharp.dll:.WormController
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 9f07aaefd0255462bb6e4f9e5da6b2d4 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -15,8 +15,9 @@ c24a21b131bfa67be1162db2cba4b52b UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.testScript
 a5d823b04ca4ab1428098434aae23ceb Assembly-CSharp.dll:.keyHole
 6089aee0f9b90da4c6039b6257dba63c Assembly-CSharp.dll:.BouncyEnemy
-085566e54511c6cd5ad48f6fec20b8f5 Assembly-CSharp.dll:.BoosterSpawner
+f87207a86cea13422f15e08b3100e3a6 Assembly-CSharp.dll:.BoosterSpawner
 0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.SpacebackgroundScroller
+a5d823b04ca4ab1428098434aae23ceb Assembly-CSharp.dll:.CookieKeyHole1
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -86,6 +87,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 9803ff8ca2516a781dc15f8fab1fe68a Assembly-CSharp.dll:.Checkpoint
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.fuel
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneLoader
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainMenu
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Laser
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 9f07aaefd0255462bb6e4f9e5da6b2d4 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -146,7 +148,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 869612dc34924e8f2623faaf63424789 Assembly-CSharp.dll:.PlanetLoader
-cb464e81e77871451dd7842b690a35f2 Assembly-CSharp.dll:.Booster
+bf9f54dd2dad4a71739e945e1b3219ff Assembly-CSharp.dll:.Booster
 b54c92a9f202b83fec4b09ed56bb3bed Assembly-CSharp.dll:.Instruction
 f0bdc1041dee6504f25216b38b2bb3cb TextMeshPro-1.0.55.2017.1.0b12.dll:TMPro.InlineGraphic
 cd5f66d713a060bf891e329290b64cc4 TextMeshPro-1.0.55.2017.1.0b12.dll:TMPro.InlineGraphicManager
@@ -174,6 +176,7 @@ dd5481137759597d614818793c90a7fe Assembly-CSharp.dll:.Mover
 414ff45476519129fa5bd2ae4555d40f Assembly-CSharp.dll:.keyLock
 bb1f7a062f7f4a4aa37eb6056d01ae88 Assembly-CSharp.dll:.MoldMovement
 4d3b825960e445fcc13bd3b1de14cf58 Assembly-CSharp.dll:.SpaceShipMovement1
+414ff45476519129fa5bd2ae4555d40f Assembly-CSharp.dll:.CookieKeyLock1
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -206,3 +209,5 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Notification
 8fd86bb0c0197797a7c9e5e6e0530476 Assembly-CSharp.dll:.platformMover
 9e30fb0ce8c5bec44a99c2d1b96b2fa6 Assembly-CSharp.dll:.controller
+dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
+eb53d577ecfe9c2bdac4600a4594db0c Assembly-CSharp.dll:.Ring

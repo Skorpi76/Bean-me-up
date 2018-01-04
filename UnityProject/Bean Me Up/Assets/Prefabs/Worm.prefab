@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 70174627086406654}
   - component: {fileID: 114552039649322898}
   - component: {fileID: 114900625933606702}
+  - component: {fileID: 114761924247051004}
   m_Layer: 0
   m_Name: Worm
   m_TagString: Untagged
@@ -357,7 +358,7 @@ MonoBehaviour:
   shrinkTime: 0.8
   moveTime: 2
   moveAmount: 15000
-  pursueDistance: 30
+  pursueDistance: 40
   damageAmount: 0
 --- !u!114 &114585488222747724
 MonoBehaviour:
@@ -413,6 +414,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114761924247051004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305784908231968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a701f0e120394e4998d51c7a988fa93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Respawner: {fileID: 0}
 --- !u!114 &114801378552909226
 MonoBehaviour:
   m_ObjectHideFlags: 1

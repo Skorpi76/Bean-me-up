@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour {
     // Use this for initialization
     void Start () {
         health = maxHealth;	
-		if (gameObject.transform.Find ("Canvas")) {
+		if (gameObject.transform.Find ("Canvas") && gameObject.tag != "Player") {
 			Debug.Log ("Has world health bar");
 			hasWorldHealthBar = true;
 			canvas = gameObject.transform.Find ("Canvas");
