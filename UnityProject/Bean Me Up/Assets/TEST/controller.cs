@@ -109,10 +109,7 @@ public class controller : MonoBehaviour {
             spaceCanvas.SetActive(false);
             shipcompass.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			//jump
-			if (Input.GetKeyDown ("space") && !falling) {
-				rb.AddForce (transform.up * 165);
-                GetComponent<Animator>().SetTrigger("Jump");
-            }
+
 
 			//gravity
 			rb.AddForce (gravityPull);
@@ -127,7 +124,7 @@ public class controller : MonoBehaviour {
 			//raycasts to deturmin if we are on the ground
 			bool groundHit = false;
 			foreach (Transform t in allGroundChildren) {
-				RaycastHit2D hit = Physics2D.Raycast (t.position, transform.up * -1 * 0.1f, 1.2f, walkLayer);
+				RaycastHit2D hit = Physics2D.Raycast (t.position, transform.up * -1,  .1f, walkLayer);
 				if (hit.collider != null) {
 					groundHit = true;
 				}
@@ -197,6 +194,11 @@ public class controller : MonoBehaviour {
 					localSpaceVelocity = new Vector3 (localSpaceVelocity.x * 0.2f , localSpaceVelocity.y, 0);
 				}
 
+			}
+
+			if (Input.GetKeyDown ("space") && !falling) {
+				rb.AddForce (transform.up * 165);
+				GetComponent<Animator>().SetTrigger("Jump");
 			}
 
 			//re-apply updated velocity

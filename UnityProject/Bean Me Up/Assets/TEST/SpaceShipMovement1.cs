@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class SpaceShipMovement1 : MonoBehaviour
 {
+
+	public Sprite pillotedSprite;
+	public Sprite emptySprite;
+
     private Rigidbody2D rb;
     public float maxVelocity = 3;
     public float rotationSpeed = 3;
@@ -39,6 +43,8 @@ public class SpaceShipMovement1 : MonoBehaviour
 
 
 	public void EnterShip(){
+
+		GetComponent<SpriteRenderer> ().sprite = pillotedSprite;
 
         if (engine == null)
         {
@@ -84,7 +90,7 @@ public class SpaceShipMovement1 : MonoBehaviour
             }
 
             if (Input.GetKeyDown ("f")) {
-				print ("getout");
+				GetComponent<SpriteRenderer> ().sprite = emptySprite;
 				GameObject player = Instantiate (playerPrefab, transform.position + transform.right, transform.rotation) as GameObject;
 
 				player.GetComponent<Rigidbody2D> ().AddForce (rb.velocity.normalized * (rb.velocity.magnitude + 100)); 

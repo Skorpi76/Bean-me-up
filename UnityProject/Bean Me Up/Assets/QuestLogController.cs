@@ -14,6 +14,8 @@ public class QuestLogController : MonoBehaviour {
 	public GameObject enemyText;
 	public GameObject boosterText;
 
+	public GameObject planet;
+
 	public GameObject NotificationPrefab;
 	GameObject notificationReference;
 
@@ -46,6 +48,8 @@ public class QuestLogController : MonoBehaviour {
 			planetText.GetComponent<TextMeshProUGUI>().text = "- Visit all the planets\n\t " + PlanetCount + " of 5";
 			CreateNotification (PlanetCount + " out of 5 planets visited.");
 		}
+
+
 	}
 
 	public void AddEnemy(){
@@ -59,7 +63,12 @@ public class QuestLogController : MonoBehaviour {
 	public void AddBeanBooster(int ID){
 		BoosterCount++;
 		boosterCollected [ID] = true;
-		if (BoosterCount <= 15) {
+
+		if (BoosterCount == 15) {
+			boosterText.GetComponent<TextMeshProUGUI> ().text = "- Collect all of the bean boosters\n\t " + BoosterCount + " of 15";
+			Instantiate (planet);
+			CreateNotification ("A new planet has mysteriously appeared");
+		} else if (BoosterCount < 15) {
 			boosterText.GetComponent<TextMeshProUGUI>().text = "- Collect all of the bean boosters\n\t " + BoosterCount + " of 15";
 			CreateNotification (BoosterCount + " out of 15 boosters collected.");
 		}
