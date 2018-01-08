@@ -46,6 +46,11 @@ public class LaunchPad : MonoBehaviour
     public void ExitPlanet()
     {
         UnLoadLevel();
+		if(GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().shipCheckpoint != null){
+			if (GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().shipCheckpoint.GetComponent<Ring> ()) {
+				GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().shipCheckpoint.GetComponent<Ring> ().Deactivate ();
+			}
+		}
         GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().shipCheckpoint = shipCheckpoint;
 
         Booster[] boosters = GameObject.FindObjectsOfType<Booster>();
@@ -56,6 +61,12 @@ public class LaunchPad : MonoBehaviour
                 Destroy(b.gameObject);
             }
         }
+
+		PrefabSpawner[] spawners = GameObject.FindObjectsOfType<PrefabSpawner>();
+		foreach (PrefabSpawner ps in spawners)
+		{
+			ps.Spawn ();
+		}
     }
 
     public void EnterPlanet()
@@ -67,7 +78,15 @@ public class LaunchPad : MonoBehaviour
         ship.GetComponent<SpaceShipMovement1>().launchPad = gameObject;
 
         LoadLevel();
+
+		if(GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().shipCheckpoint != null){
+			if (GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().shipCheckpoint.GetComponent<Ring> ()) {
+				GameObject.Find ("CheckpointManager").GetComponent<CheckpointManager> ().shipCheckpoint.GetComponent<Ring> ().Deactivate ();
+			}
+		}
         GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().shipCheckpoint = shipCheckpoint;
+
+
         GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().playerCheckpoint = playerCheckpoint;
 
         if (visited == false)

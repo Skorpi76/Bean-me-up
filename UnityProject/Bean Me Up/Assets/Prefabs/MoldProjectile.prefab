@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: -10
+  isEnemyProjectile: 1
 --- !u!212 &212402071458283492
 SpriteRenderer:
   m_ObjectHideFlags: 1

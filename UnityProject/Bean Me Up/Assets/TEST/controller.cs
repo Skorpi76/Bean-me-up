@@ -19,17 +19,26 @@ public class controller : MonoBehaviour {
 	public LayerMask shipLayerMask;
 	public GameObject rayTrans;
 
+	public GameObject jumpTrans;
+
 	public int jetPackCharge = 3;
 
     public float fuelCollected = 0;
 
     public GameObject spaceCanvas;
 
+	Transform[] allChildren;
+	Transform[] allGroundChildren;
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		Camera.main.GetComponent<CameraFollowSpaceShip> ().player = gameObject;
 		Camera.main.GetComponent<CameraFollowSpaceShip>().followPlayer = true;
+
+
+		allChildren = rayTrans.GetComponentsInChildren<Transform>();
+		allGroundChildren = jumpTrans.GetComponentsInChildren<Transform>();
 	}
 
 	IEnumerator JetPackReCharge(){
@@ -115,15 +124,24 @@ public class controller : MonoBehaviour {
 
 
 
-			//raycast to deturmin if we are on the ground
-			RaycastHit2D hit = Physics2D.Raycast (transform.position, transform.up * -1, 1.2f, walkLayer);
-			if (hit.collider != null) {
+			//raycasts to deturmin if we are on the ground
+			bool groundHit = false;
+			foreach (Transform t in allGroundChildren) {
+				RaycastHit2D hit = Physics2D.Raycast (t.position, transform.up * -1 * 0.1f, 1.2f, walkLayer);
+				if (hit.collider != null) {
+					groundHit = true;
+				}
+			}
+
+
+
+			if (groundHit) {
 				falling = false;
                 GetComponent<Animator>().SetBool("falling",false);
                 controlFactor = 1f;
 
                 bool hhitbool = false;
-                Transform[] allChildren = rayTrans.GetComponentsInChildren<Transform>();
+                //Transform[] allChildren = rayTrans.GetComponentsInChildren<Transform>();
                 
                 foreach (Transform p in allChildren)
                 {
@@ -158,7 +176,7 @@ public class controller : MonoBehaviour {
 				if (Mathf.Abs (Input.GetAxis ("Horizontal")) > 0) {
 
 					bool hhitbool = false;
-                    Transform[] allChildren = rayTrans.GetComponentsInChildren<Transform>();
+                    //Transform[] allChildren = rayTrans.GetComponentsInChildren<Transform>();
                     foreach (Transform p in allChildren)
                     {
                         RaycastHit2D horizontalHit = Physics2D.Raycast(p.position, transform.right * Input.GetAxis("Horizontal"), .6f, walkLayer);

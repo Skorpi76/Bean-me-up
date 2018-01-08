@@ -50,7 +50,7 @@ public class QuestLogController : MonoBehaviour {
 
 	public void AddEnemy(){
 		EnemyCount++;
-		if (EnemyCount < 10) {
+		if (EnemyCount <= 10) {
 			enemyText.GetComponent<TextMeshProUGUI>().text = "- Defeat 10 enemies\n\t " + EnemyCount + " of 10";
 			CreateNotification (EnemyCount + " out of 10 enemies killed.");
 		}
@@ -59,7 +59,7 @@ public class QuestLogController : MonoBehaviour {
 	public void AddBeanBooster(int ID){
 		BoosterCount++;
 		boosterCollected [ID] = true;
-		if (BoosterCount < 15) {
+		if (BoosterCount <= 15) {
 			boosterText.GetComponent<TextMeshProUGUI>().text = "- Collect all of the bean boosters\n\t " + BoosterCount + " of 15";
 			CreateNotification (BoosterCount + " out of 15 boosters collected.");
 		}

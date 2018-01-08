@@ -11,6 +11,8 @@ public class Ring : MonoBehaviour {
 
 
 	void Start(){
+
+		GetComponent<Checkpoint> ().ringScript = this;
 		foreach (Transform t in transform) {
 			if (t.tag != "Map") {
 				t.GetComponent<SpriteRenderer> ().color = red;

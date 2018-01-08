@@ -8,6 +8,7 @@ public class Checkpoint : MonoBehaviour {
 	public PlayerRespawnMode pRespawnMode;
 	public RespawnType spawnPlayerType;
     public float fuelSaved = 0;
+	public Ring ringScript;
 
 	// Use this for initialization
 	public void Respawn(){

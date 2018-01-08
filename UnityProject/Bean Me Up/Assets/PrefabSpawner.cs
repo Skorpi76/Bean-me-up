@@ -6,6 +6,7 @@ public class PrefabSpawner : MonoBehaviour {
 
 	public GameObject prefab;
 	public float respawntime = 90;
+	GameObject prefabInstance;
 
 
 	// Use this for initialization
@@ -13,8 +14,11 @@ public class PrefabSpawner : MonoBehaviour {
 		Spawn ();
 	}
 
-	void Spawn(){
-		GameObject prefabInstance = Instantiate (prefab, transform.position, transform.rotation) as GameObject;
+	public void Spawn(){
+		if (prefabInstance != null) {
+			Destroy (prefabInstance);
+		}
+		prefabInstance = Instantiate (prefab, transform.position, transform.rotation) as GameObject;
 		prefabInstance.GetComponent<SpawnController> ().Respawner = this;
 	}
 

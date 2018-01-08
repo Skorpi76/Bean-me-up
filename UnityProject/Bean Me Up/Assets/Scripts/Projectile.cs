@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour {
     private Rigidbody2D rb;
     public float speed = 10;
     public int damage = -10;
-
+	public bool isEnemyProjectile = false;
 
     private void Start()
     {
@@ -27,12 +27,22 @@ public class Projectile : MonoBehaviour {
     }
     protected virtual void OnCollision(GameObject obj)
     {
-        Entity entity = obj.GetComponent<Entity>();
-        if (entity != null)
-        {
-            
-            entity.ModifyHealth(damage);
+		if (isEnemyProjectile) {
+			if (obj.tag == "Player" || obj.tag == "Ship") {
+				Entity entity = obj.GetComponent<Entity> ();
+				entity.ModifyHealth (damage);
+			} else {
+				//Debug.Log ("Enemy to enemy attack");
+			}
+		} else {
+			Entity entity = obj.GetComponent<Entity>();
+			if (entity != null)
+			{
 
-        }
+				entity.ModifyHealth(damage);
+
+			}
+		}
+        
     }
 }
