@@ -62,11 +62,11 @@ public class LaunchPad : MonoBehaviour
             }
         }
 
-		PrefabSpawner[] spawners = GameObject.FindObjectsOfType<PrefabSpawner>();
-		foreach (PrefabSpawner ps in spawners)
-		{
-			ps.Spawn ();
-		}
+		//PrefabSpawner[] spawners = GameObject.FindObjectsOfType<PrefabSpawner>();
+		//foreach (PrefabSpawner ps in spawners)
+		//{
+		//	ps.Spawn ();
+		//}
     }
 
     public void EnterPlanet()
