@@ -30,6 +30,8 @@ public class SpaceShipMovement1 : MonoBehaviour
     public float fuel = 100;
     public float Maxfuel = 100;
     public Slider fuelSlider;
+
+	public bool InSpace = false;
     
 
 	private void Start()
@@ -127,9 +129,12 @@ public class SpaceShipMovement1 : MonoBehaviour
 			rb.AddForce (gravityPull);
 		}
 
-			if (rb.velocity.magnitude > maxVelocity) {
-				rb.velocity = rb.velocity.normalized * maxVelocity;
-			}
+		if (rb.velocity.magnitude > maxVelocity) {
+			rb.velocity = rb.velocity.normalized * maxVelocity;
+		}
+		if (InSpace) {
+			gravityPull = Vector3.zero;
+		}
 	}
 
 

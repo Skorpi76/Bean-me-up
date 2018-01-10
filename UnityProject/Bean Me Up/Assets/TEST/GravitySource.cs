@@ -15,11 +15,13 @@ public class GravitySource : MonoBehaviour {
 		if(range == 0)
 		range = surfaceRadius * 3;
 	}
-	
+		
+
 	// Update is called once per frame
 	void Update () {
 		Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, range, GravityObjects);
 
+		bool hasShip = false;
         foreach (Collider2D col in objects) {
 			if (col.attachedRigidbody != null ){
 			
@@ -29,6 +31,7 @@ public class GravitySource : MonoBehaviour {
 				float factor = Mathf.Clamp( ((range - surfaceRadius) - Distance) / (range - surfaceRadius),0,1);
 				Vector3 gForce =  Direction * (gravityForce*factor) * col.attachedRigidbody.mass * Time.deltaTime;
 				if (col.tag == "Ship") {
+					hasShip = true;
 					col.GetComponent<SpaceShipMovement1> ().gravityPull = gForce;
 				} else if (col.tag == "Player") {
 					
@@ -45,8 +48,12 @@ public class GravitySource : MonoBehaviour {
 					Camera.main.GetComponent<CameraFollowSpaceShip> ().followPlayer = true;
 					Camera.main.GetComponent<CameraFollowSpaceShip> ().player = col.gameObject;
 				}else if(col.tag == "Enemies"){
-					col.attachedRigidbody.AddForce (Direction * (gravityForce/factor) * col.attachedRigidbody.mass * Time.deltaTime);
-					col.transform.rotation = Quaternion.Lerp (Quaternion.AngleAxis (Mathf.Atan2 (Direction.y, Direction.x) * Mathf.Rad2Deg + 90, Vector3.forward), col.transform.rotation, Distance / (range - surfaceRadius));
+					if (col.GetComponent<WormController> ()) {
+						Debug.Log ("Worm in Planet");
+					} else {
+						col.attachedRigidbody.AddForce (Direction * (gravityForce / factor) * col.attachedRigidbody.mass * Time.deltaTime);
+						col.transform.rotation = Quaternion.Lerp (Quaternion.AngleAxis (Mathf.Atan2 (Direction.y, Direction.x) * Mathf.Rad2Deg + 90, Vector3.forward), col.transform.rotation, Distance / (range - surfaceRadius));
+					}
 				}else{
 
 					col.attachedRigidbody.AddForce (Direction * (gravityForce/factor) * col.attachedRigidbody.mass * Time.deltaTime);
@@ -56,5 +63,7 @@ public class GravitySource : MonoBehaviour {
 
 			}
         }
+
+		GameObject.FindGameObjectWithTag ("Ship").GetComponent<SpaceShipMovement1> ().InSpace = !hasShip;
 	}
 }

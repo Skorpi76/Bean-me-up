@@ -53,17 +53,43 @@ public class WormController : MonoBehaviour {
 		float distance = Vector3.Distance (transform.position, player.transform.position);
 		if (distance<= pursueDistance) {
 			//pursue
-			Debug.Log("Pursue");
 
-			//move
-			Vector3 direction =  player.transform.position - transform.position; //direction to player
-			rb.AddForce (direction.normalized * moveAmount);
+			bool returnStart = false;
+			if (player.GetComponent<SpaceShipMovement1> ()) {
+				if (player.GetComponent<SpaceShipMovement1> ().gravityPull != Vector3.zero) {
+					returnStart = true;
+				}
+			}if (player.GetComponent<controller> ()) {
+				if (!player.GetComponent<controller> ().inSpace) {
+					returnStart = true;
+				}
+			}
+
+			if(returnStart){
+				//move
+				Vector3 direction = GetComponent<SpawnController>().Respawner.transform.position - transform.position; //direction to player
+				rb.AddForce (direction.normalized * moveAmount);
+
+				//rotate
+				float rot_z = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+				targetRotation = Quaternion.Euler (0f, 0f, rot_z);
+				yield return new WaitForSeconds (moveTime);
+				anim.SetTrigger ("Move");
+
+			} else {
+
+				Debug.Log ("Pursue");
+
+				//move
+				Vector3 direction = player.transform.position - transform.position; //direction to player
+				rb.AddForce (direction.normalized * moveAmount);
 		
-			//rotate
-			float rot_z = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
-			targetRotation = Quaternion.Euler (0f, 0f, rot_z );
-			yield return new WaitForSeconds (moveTime);
-			anim.SetTrigger ("Move");
+				//rotate
+				float rot_z = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+				targetRotation = Quaternion.Euler (0f, 0f, rot_z);
+				yield return new WaitForSeconds (moveTime);
+				anim.SetTrigger ("Move");
+			}
 			//transform.rotation = Quaternion.Lerp(transform.rotation, , Time.deltaTime * 10);
 		}else{
 
