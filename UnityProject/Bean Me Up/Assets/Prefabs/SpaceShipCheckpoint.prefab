@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242795688098906}
   m_LocalRotation: {x: -0, y: -0, z: 0.43783122, w: 0.8990572}
-  m_LocalPosition: {x: 385.22, y: 181.03, z: 0}
+  m_LocalPosition: {x: 1076.1515, y: -112.49803, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4472319844615764}
@@ -177,7 +177,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.036621094, y: -0.40287018}
+  m_Offset: {x: 0.026505232, y: -0.6113554}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -188,7 +188,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.764526, y: 1.8789978}
+  m_Size: {x: 7.7743573, y: 0.9498894}
   m_EdgeRadius: 0
 --- !u!114 &114027626084845468
 MonoBehaviour:
@@ -204,6 +204,7 @@ MonoBehaviour:
   pRespawnMode: 1
   spawnPlayerType: 0
   fuelSaved: 0
+  ringScript: {fileID: 0}
 --- !u!114 &114549797219180642
 MonoBehaviour:
   m_ObjectHideFlags: 1

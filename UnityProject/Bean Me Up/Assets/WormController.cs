@@ -14,10 +14,14 @@ public class WormController : MonoBehaviour {
 	Quaternion targetRotation;
 	bool hasMoved = false;
 
+	IEnumerator mover;
+
 	public float damageAmount;
 
 	// Use this for initialization
 	void Start () {
+
+		mover = Move ();
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		MoveAgain ();
@@ -30,6 +34,8 @@ public class WormController : MonoBehaviour {
 	}
 
 	void Update(){
+		
+
 		if (targetRotation.x != 0 || targetRotation.y != 0 || targetRotation.z != 0 || targetRotation.w != 0) {
 			transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, 15 * Time.deltaTime);
 		}

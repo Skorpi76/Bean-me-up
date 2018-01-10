@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 222397790868436336}
   - component: {fileID: 114111375323102552}
   - component: {fileID: 114126309839544574}
+  - component: {fileID: 114864765711061982}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -103,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677444321865844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 901.53644, y: 4.175439, z: -5.2460938}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224279443616680504}
@@ -208,7 +209,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114111375323102552}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114864765711061982}
+        m_MethodName: SendMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Close
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114707069117904734
@@ -362,6 +374,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114864765711061982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770238256786794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d25e1777aaec3044bb86d09bd1d9606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222397790868436336
 CanvasRenderer:
   m_ObjectHideFlags: 1
